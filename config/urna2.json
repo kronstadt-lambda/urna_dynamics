@@ -1,0 +1,742 @@
+[
+  {
+    "order": 1,
+    "urn": "urn2",
+    "name": "Fernando Rospigliosi",
+    "name_acronym": "FR",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 2,
+    "urn": "urn2",
+    "name": "Waldemar Cerrón",
+    "name_acronym": "WC",
+    "party": "Perú Libre",
+    "party_acronym": "PL",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 3,
+    "urn": "urn2",
+    "name": "Ilich López",
+    "name_acronym": "IL",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "OPCION 2",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 4,
+    "urn": "urn2",
+    "name": "Lady Camones",
+    "name_acronym": "LC",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 5,
+    "urn": "urn2",
+    "name": "Alejandro Cavero",
+    "name_acronym": "AC",
+    "party": "Avanza País",
+    "party_acronym": "AvP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 6,
+    "urn": "urn2",
+    "name": "Maria del Carmen Alva",
+    "name_acronym": "MCA",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "OPCION 2",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 7,
+    "urn": "urn2",
+    "name": "Carlos Alva",
+    "name_acronym": "CA",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 8,
+    "urn": "urn2",
+    "name": "Rosselli Amuruz",
+    "name_acronym": "RA",
+    "party": "Avanza País",
+    "party_acronym": "AvP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 9,
+    "urn": "urn2",
+    "name": "José Arriola",
+    "name_acronym": "JA",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 10,
+    "urn": "urn2",
+    "name": "Alfredo Azurín",
+    "name_acronym": "AA",
+    "party": "Somos Perú",
+    "party_acronym": "SP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 11,
+    "urn": "urn2",
+    "name": "Rosangella Barbarán",
+    "name_acronym": "RB",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 12,
+    "urn": "urn2",
+    "name": "Diego Bazán",
+    "name_acronym": "DB",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 13,
+    "urn": "urn2",
+    "name": "Guido Bellido",
+    "name_acronym": "GR",
+    "party": "Podemos Perú",
+    "party_acronym": "FP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 14,
+    "urn": "urn2",
+    "name": "Juan Burgos",
+    "name_acronym": "JB",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 15,
+    "urn": "urn2",
+    "name": "Ernesto Bustamante",
+    "name_acronym": "EB",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 16,
+    "urn": "urn2",
+    "name": "Eduardo Castillo",
+    "name_acronym": "EC",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 17,
+    "urn": "urn2",
+    "name": "Roberto Chiabra",
+    "name_acronym": "RC",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 18,
+    "urn": "urn2",
+    "name": "Miguel Ciccia",
+    "name_acronym": "MC",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_1D_patron1"]
+  },
+  {
+    "order": 19,
+    "urn": "urn2",
+    "name": "María Córdova",
+    "name_acronym": "MC",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 20,
+    "urn": "urn2",
+    "name": "Victor Cutipa",
+    "name_acronym": "VC",
+    "party": "Juntos por el Perú",
+    "party_acronym": "JPP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 21,
+    "urn": "urn2",
+    "name": "Raúl Doroteo",
+    "name_acronym": "RD",
+    "party": "No agrupado",
+    "party_acronym": "NA",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 22,
+    "urn": "urn2",
+    "name": "Gladys Echaíz",
+    "name_acronym": "GE",
+    "party": "Honor y Democracia",
+    "party_acronym": "HyD",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_4D_patron2"]
+  },
+  {
+    "order": 23,
+    "urn": "urn2",
+    "name": "Jhaec Espinoza",
+    "name_acronym": "JE",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 24,
+    "urn": "urn2",
+    "name": "Diana Gonzáles",
+    "name_acronym": "DG",
+    "party": "Avanza País",
+    "party_acronym": "AvP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 25,
+    "urn": "urn2",
+    "name": "Paul Gutiérrez",
+    "name_acronym": "PG",
+    "party": "Somos Perú",
+    "party_acronym": "SP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 26,
+    "urn": "urn2",
+    "name": "Noelia Herrera",
+    "name_acronym": "NH",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 27,
+    "urn": "urn2",
+    "name": "Raúl Huamán",
+    "name_acronym": "RH",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 28,
+    "urn": "urn2",
+    "name": "María Jáuregui",
+    "name_acronym": "MJ",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_4D_patron2"]
+  },
+  {
+    "order": 29,
+    "urn": "urn2",
+    "name": "Heidy Juárez",
+    "name_acronym": "HJ",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 30,
+    "urn": "urn2",
+    "name": "Elva Julon",
+    "name_acronym": "EJ",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 31,
+    "urn": "urn2",
+    "name": "Nieves Limachi",
+    "name_acronym": "NL",
+    "party": "Juntos por el Perú",
+    "party_acronym": "JPP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 32,
+    "urn": "urn2",
+    "name": "Juan Lizarzaburu",
+    "name_acronym": "JL",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 33,
+    "urn": "urn2",
+    "name": "Jeny López",
+    "name_acronym": "JL",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 34,
+    "urn": "urn2",
+    "name": "José Luna",
+    "name_acronym": "JL",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 35,
+    "urn": "urn2",
+    "name": "Pedro Martínez",
+    "name_acronym": "PM",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "OPCION 2",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 36,
+    "urn": "urn2",
+    "name": "Elizabeth Medina",
+    "name_acronym": "EM",
+    "party": "Somos Perú",
+    "party_acronym": "SP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 37,
+    "urn": "urn2",
+    "name": "Isaac Mita",
+    "name_acronym": "IM",
+    "party": "Perú Libre",
+    "party_acronym": "PL",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 38,
+    "urn": "urn2",
+    "name": "Silvia Monteza",
+    "name_acronym": "SM",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 39,
+    "urn": "urn2",
+    "name": "Jorge Montoya",
+    "name_acronym": "JM",
+    "party": "Honor y Democracia",
+    "party_acronym": "HyD",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_4D_patron2"]
+  },
+  {
+    "order": 40,
+    "urn": "urn2",
+    "name": "Jorge Morante",
+    "name_acronym": "JM",
+    "party": "Somos Perú",
+    "party_acronym": "SP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 41,
+    "urn": "urn2",
+    "name": "Juan Mori",
+    "name_acronym": "JM",
+    "party": "Acción Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 42,
+    "urn": "urn2",
+    "name": "Martha Moyano",
+    "name_acronym": "MM",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 43,
+    "urn": "urn2",
+    "name": "Alejandro Muñante",
+    "name_acronym": "AM",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 44,
+    "urn": "urn2",
+    "name": "Gustavo Ortiz",
+    "name_acronym": "GO",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 45,
+    "urn": "urn2",
+    "name": "Leslie Olivos",
+    "name_acronym": "LO",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 46,
+    "urn": "urn2",
+    "name": "Ariana Orué",
+    "name_acronym": "AO",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 47,
+    "urn": "urn2",
+    "name": "Flor Medina",
+    "name_acronym": "FM",
+    "party": "No agrupado",
+    "party_acronym": "NA",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 48,
+    "urn": "urn2",
+    "name": "Javier Padilla",
+    "name_acronym": "JP",
+    "party": "Honor y Democracia",
+    "party_acronym": "HyD",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 49,
+    "urn": "urn2",
+    "name": "Francis Paredes",
+    "name_acronym": "FP",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 50,
+    "urn": "urn2",
+    "name": "Karol Paredes",
+    "name_acronym": "KP",
+    "party": "Avanza País",
+    "party_acronym": "AvP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 51,
+    "urn": "urn2",
+    "name": "Alex Paredes",
+    "name_acronym": "AP",
+    "party": "Somos Perú",
+    "party_acronym": "SP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 52,
+    "urn": "urn2",
+    "name": "Susel Paredes",
+    "name_acronym": "SP",
+    "party": "Bloque Democrático Popular",
+    "party_acronym": "BDP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 53,
+    "urn": "urn2",
+    "name": "Alfredo Sinche",
+    "name_acronym": "AS",
+    "party": "Bancada Socialista",
+    "party_acronym": "BS",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 54,
+    "urn": "urn2",
+    "name": "Luis Picón",
+    "name_acronym": "LP",
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 55,
+    "urn": "urn2",
+    "name": "Kelly Portalatino",
+    "name_acronym": "KP",
+    "party": "Perú Libre",
+    "party_acronym": "PL",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 56,
+    "urn": "urn2",
+    "name": "Segundo Quiroz",
+    "name_acronym": "SQ",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 57,
+    "urn": "urn2",
+    "name": "Wilson Quispe",
+    "name_acronym": "WQ",
+    "party": "Juntos por el Perú",
+    "party_acronym": "JPP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 58,
+    "urn": "urn2",
+    "name": "Jaime Quito",
+    "name_acronym": "JQ",
+    "party": "Bancada Socialista",
+    "party_acronym": "BS",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 59,
+    "urn": "urn2",
+    "name": "Tania Ramírez",
+    "name_acronym": "TR",
+    "party": "Fuerza Popular",
+    "party_acronym": "FP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_4D_patron1", "voto_3D_patron4a", "voto_3D_patron4b"]
+  },
+  {
+    "order": 60,
+    "urn": "urn2",
+    "name": "Janet Rivas",
+    "name_acronym": "JR",
+    "party": "Perú Libre",
+    "party_acronym": "PL",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 61,
+    "urn": "urn2",
+    "name": "Silvana Robles",
+    "name_acronym": "SR",
+    "party": "Bancada Socialista",
+    "party_acronym": "BS",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 62,
+    "urn": "urn2",
+    "name": "Magaly Ruíz",
+    "name_acronym": "MR",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_4D_patron2"]
+  },
+  {
+    "order": 63,
+    "urn": "urn2",
+    "name": "Eduardo Salhuana",
+    "name_acronym": "ES",
+    "party": "Alianza para el Progreso",
+    "party_acronym": "APP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 64,
+    "urn": "urn2",
+    "name": "Wilson Soto",
+    "name_acronym": "WS",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 65,
+    "urn": "urn2",
+    "name": "Germán Tacuri",
+    "name_acronym": "GT",
+    "party": "Juntos por el Perú",
+    "party_acronym": "JPP",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 66,
+    "urn": "urn2",
+    "name": "María Taipe",
+    "name_acronym": "MT",
+    "party": "Perú Libre",
+    "party_acronym": "PL",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 67,
+    "urn": "urn2",
+    "name": "Nivardo Tello",
+    "name_acronym": "NT",
+    "party": "Perú Libre",
+    "party_acronym": "PL",
+    "vote": "OPCION 4",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 68,
+    "urn": "urn2",
+    "name": "Cheryl Trigozo",
+    "name_acronym": "CT",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 69,
+    "urn": "urn2",
+    "name": "Jorge Zeballos",
+    "name_acronym": "JZ",
+    "party": "Renovación Popular",
+    "party_acronym": "RP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  },
+  {
+    "order": 70,
+    "urn": "urn2",
+    "name": "Carlos Zeballos",
+    "name_acronym": "CZ",
+    "party": "Bloque Democrático Popular",
+    "party_acronym": "BDP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 71,
+    "urn": "urn2",
+    "name": "Ana Zegarra",
+    "name_acronym": "AZ",
+    "party": "Somos Perú",
+    "party_acronym": "SP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 72,
+    "urn": "urn2",
+    "name": "Luis Aragón",
+    "name_acronym": "LA",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 73,
+    "urn": "urn2",
+    "name": "Margot Palacios",
+    "name_acronym": "MP",
+    "party": "No agrupado",
+    "party_acronym": "NA",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+  },
+  {
+    "order": 74,
+    "urn": "urn2",
+    "name": "Hilda Portero",
+    "name_acronym": "HP",
+    "party": "Acción Popular",
+    "party_acronym": "AP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+  }
+]
