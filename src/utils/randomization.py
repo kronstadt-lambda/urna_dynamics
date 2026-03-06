@@ -12,7 +12,8 @@ class GeneradorAleatorioVotos:
         Inicializa el generador. Si se provee una semilla,
         los resultados serán idénticos en cada ejecución.
         """
-        self.random_gen = random.Random(semilla)
+        self.semilla_usada = semilla if semilla is not None else random.randint(1, 10000)
+        self.random_gen = random.Random(self.semilla_usada)
 
     def obtener_parametros_caida(self):
         """
@@ -32,7 +33,7 @@ class GeneradorAleatorioVotos:
         loc_y = round(r * math.sin(theta), 3)
 
         # 2. Rotación en Y: 90 +/- 15 grados (75 a 105)
-        rot_y = round(self.random_gen.uniform(75, 105), 2)
+        rot_y = round(self.random_gen.uniform(-10, 10), 2)
 
         # 3. Rotación en Z: 0 a 360 grados
         rot_z = round(self.random_gen.uniform(0, 360), 2)
@@ -43,3 +44,7 @@ class GeneradorAleatorioVotos:
             "rot_y": rot_y,
             "rot_z": rot_z
         }
+
+    def elegir_patron(self, lista_patrones: list) -> str:
+        """Elige uniformemente un patrón de doblez de la lista provista."""
+        return self.random_gen.choice(lista_patrones)

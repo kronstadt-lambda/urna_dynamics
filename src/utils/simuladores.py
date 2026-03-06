@@ -15,8 +15,41 @@ class SimuladorFisico:
         self._limpiar_escena()
 
     def _limpiar_escena(self):
+        """
+        Limpia la escena, resetea la línea de tiempo y purga memoria.
+        Preparado para soportar miles de iteraciones sin fugas (Memory Leaks).
+        """
+        scene = bpy.context.scene
+
+        # 1. CRÍTICO: Resetear la línea de tiempo al inicio
+        scene.frame_set(1)
+
+        # 2. Eliminar todos los objetos físicos del Viewport
         bpy.ops.object.select_all(action='SELECT')
         bpy.ops.object.delete()
+
+        # 3. Limpiar caché y AUMENTAR PRECISIÓN del Rigid Body World
+        if scene.rigidbody_world:
+            scene.rigidbody_world.point_cache.frame_start = 1
+            scene.rigidbody_world.point_cache.frame_end = 250
+
+            # # SOLUCIÓN EFECTO BALA: Aumentamos los pasos de cálculo para evitar explosiones
+            # scene.rigidbody_world.substeps_per_frame = 120  # Predeterminado es 10. 120 asegura colisiones de papel
+            # scene.rigidbody_world.solver_iterations = 60    # Aumenta la rigidez de las colisiones
+
+            # Liberar el caché de la memoria
+            bpy.ops.ptcache.free_bake_all()
+
+        # 4. GARBAGE COLLECTION: Eliminar mallas y materiales huérfanos
+        # Cuando borras un objeto en Blender, su malla (geometría) se queda en la RAM.
+        # Esto las elimina definitivamente para no saturar tu servidor Linux.
+        for block in bpy.data.meshes:
+            if block.users == 0:
+                bpy.data.meshes.remove(block)
+
+        for block in bpy.data.materials:
+            if block.users == 0:
+                bpy.data.materials.remove(block)
 
     def importar_objeto(self, ruta_archivo: str, nombre_original: str, nombre_nuevo: str):
         directorio_interno = os.path.join(ruta_archivo, "Object")
@@ -49,6 +82,8 @@ class SimuladorFisico:
         print(f"Calculando física acumulativa (Frames: {frame_inicial} -> {frame_final})...")
         for frame in range(frame_inicial, frame_final + 1):
             scene.frame_set(frame)
+            # Obliga al motor a actualizar la matriz 3D en modo Headless
+            bpy.context.view_layer.update()
 
     def programar_caida_secuencial(self, objeto, frame_caida: int):
         """
@@ -96,21 +131,70 @@ class SimuladorFisico:
         bpy.ops.wm.save_as_mainfile(filepath=ruta_completa)
         print(f"Escena estratigráfica guardada en: {ruta_completa}")
 
-    def obtener_estado_completo(self, objeto):
-        """Extrae la posición y rotación final estática del objeto."""
+    def guardar_estado_final_como_inicio(self, directorio_destino: str, nombre_archivo: str):
+        """
+        Convierte la posición final de la simulación en la posición base (Frame 1).
+        Limpia keyframes y prepara la escena para la fase de descarga.
+        """
+        # 1. Identificar y congelar la transformación visual de cada voto
+        for obj in bpy.data.objects:
+            if obj.name.startswith("voto_"):
+                # Deseleccionamos todo para evitar aplicar cambios a objetos erróneos
+                bpy.ops.object.select_all(action='DESELECT')
+                obj.select_set(True)
+                bpy.context.view_layer.objects.active = obj
+
+                # Aplicamos la transformación visual (convierte física en posición real)
+                bpy.ops.object.visual_transform_apply()
+
+                # Limpiamos animaciones previas para que no regresen al origen al dar 'Play'
+                if obj.animation_data:
+                    obj.animation_data_clear()
+
+                # Configuramos para que sean dinámicos en la siguiente etapa
+                if obj.rigid_body:
+                    obj.rigid_body.kinematic = False
+
+        # 2. Resetear el tiempo y limpiar el caché físico
+        bpy.context.scene.frame_set(1)
+        if bpy.context.scene.rigidbody_world:
+            bpy.ops.ptcache.free_bake_all()
+            bpy.context.scene.rigidbody_world.point_cache.frame_start = 1
+
+        # 3. Guardado definitivo del archivo READY_TO_UNLOAD
+        if not nombre_archivo.endswith(".blend"):
+            nombre_archivo += ".blend"
+        ruta_completa = os.path.join(directorio_destino, nombre_archivo)
+        os.makedirs(directorio_destino, exist_ok=True)
+        bpy.ops.wm.save_as_mainfile(filepath=ruta_completa)
+
+        print(f"[CONGELADO] Escena base guardada exitosamente en: {ruta_completa}")
+
+    def obtener_estado_completo(self, objeto, metadatos_voto: dict):
+        """Extrae la posición final e integra la información del JSON."""
+
+        # Forzar una última actualización para garantizar que leemos la realidad física
+        bpy.context.view_layer.update()
+
         pos = objeto.matrix_world.translation
         rot = [math.degrees(a) for a in objeto.matrix_world.to_euler()]
 
+        # Ensamblamos el diccionario final cruzando datos físicos e información real
         return {
             "sim_id": self.sim_id,
-            "objeto": objeto.name,
+            "seed": metadatos_voto.get("sim_seed"),
+            "urn": metadatos_voto.get("urn"),
+            "order": metadatos_voto.get("order"),
+            "name_acronym": metadatos_voto.get("name_acronym"),
+            "party_acronym": metadatos_voto.get("party_acronym"),
+            "vote": metadatos_voto.get("vote"),
+            "fold_pattern_used": metadatos_voto.get("fold_pattern_used"),
             "pos_x": round(pos.x, 6),
             "pos_y": round(pos.y, 6),
             "pos_z": round(pos.z, 6),
             "rot_x": round(rot[0], 2),
             "rot_y": round(rot[1], 2),
-            "rot_z": round(rot[2], 2),
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            "rot_z": round(rot[2], 2)
         }
 
     def registrar_multiples_datos_csv(self, lista_datos: list, directorio: str, nombre_archivo: str = "registro_votacion.csv"):
