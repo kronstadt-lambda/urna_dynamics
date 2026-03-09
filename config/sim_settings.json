@@ -1,0 +1,7 @@
+{
+  "archivo_datos_json": "urna1.json",
+  "cantidad_simulaciones": 100,
+  "archivo_urna_blend": "urna.blend",
+  "archivo_voto_blend": "voto.blend",
+  "guardar_blend_inspeccion": true
+}

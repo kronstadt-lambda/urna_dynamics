@@ -12,3 +12,4 @@ ASSETS_DIR = PROJECT_ROOT / "assets"
 RESULTS_VOTE_DIR = PROJECT_ROOT / "results" / "vote"
 
 # Archivos específicos
+SIM_SETTINGS_FILE = CONFIG_DIR / "sim_settings.json"

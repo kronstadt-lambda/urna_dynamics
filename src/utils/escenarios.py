@@ -34,11 +34,15 @@ class EscenarioVotacion:
 
             # Importar y posicionar
             voto = self.simulador.importar_objeto(ruta_voto, patron_elegido, nombre_voto)
-            p = self.generador.obtener_parametros_caida()
+            p = self.generador.obtener_parametros_caida(orden)
 
             self.simulador.posicionar_objeto(
-                objeto=voto, loc_x=p['x'], loc_y=p['y'], loc_z=float(voto_info['launch_height']),
-                rot_y_grados=p['rot_y'], rot_z_grados=p['rot_z']
+                objeto=voto,
+                loc_x=p['x'],
+                loc_y=p['y'],
+                loc_z=p['z'],
+                rot_y_grados=p['rot_y'],
+                rot_z_grados=p['rot_z']
             )
 
             self.simulador.programar_caida_secuencial(voto, frame_caida=frame_actual)

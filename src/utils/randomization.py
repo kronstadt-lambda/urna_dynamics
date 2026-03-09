@@ -15,7 +15,7 @@ class GeneradorAleatorioVotos:
         self.semilla_usada = semilla if semilla is not None else random.randint(1, 10000)
         self.random_gen = random.Random(self.semilla_usada)
 
-    def obtener_parametros_caida(self):
+    def obtener_parametros_caida(self, orden: int):
         """
         Genera los 4 parámetros aleatorios basados en las restricciones físicas:
         - loc_x, loc_y: Dentro de un círculo de radio 0.04m (distribución uniforme).
@@ -32,15 +32,21 @@ class GeneradorAleatorioVotos:
         loc_x = round(r * math.cos(theta), 3)
         loc_y = round(r * math.sin(theta), 3)
 
-        # 2. Rotación en Y: 90 +/- 15 grados (75 a 105)
+        # 2. Rotación en Y: 0 +/- 10 grados (-10 a 10)
         rot_y = round(self.random_gen.uniform(-10, 10), 2)
 
         # 3. Rotación en Z: 0 a 360 grados
         rot_z = round(self.random_gen.uniform(0, 360), 2)
 
+        # 4. Altura Z Dinámica (Solución para evitar colisiones internas en Blender!)
+        altura_base = 0.15
+        incremento = 0.05
+        loc_z = round(altura_base + (orden - 1) * incremento, 3)
+
         return {
             "x": loc_x,
             "y": loc_y,
+            "z": loc_z,
             "rot_y": rot_y,
             "rot_z": rot_z
         }

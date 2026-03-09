@@ -51,6 +51,16 @@ class SimuladorFisico:
             if block.users == 0:
                 bpy.data.materials.remove(block)
 
+        # purgar keyframes.
+        for block in bpy.data.actions:
+            if block.users == 0:
+                bpy.data.actions.remove(block)
+
+        # Purgar objetos que hayan quedado residuales en la base de datos
+        for block in bpy.data.objects:
+            if block.users == 0:
+                bpy.data.objects.remove(block)
+
     def importar_objeto(self, ruta_archivo: str, nombre_original: str, nombre_nuevo: str):
         directorio_interno = os.path.join(ruta_archivo, "Object")
         bpy.ops.wm.append(
