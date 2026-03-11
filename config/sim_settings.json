@@ -1,7 +1,24 @@
 {
+  "nombre_experimento": "prueba_estratigrafia_basica",
   "archivo_datos_json": "urna1.json",
-  "cantidad_simulaciones": 100,
+  "cantidad_simulaciones": 1,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
-  "guardar_blend_inspeccion": true
+  "guardar_blend_inspeccion": true,
+  "parametros_tecnicos": {
+    "randomization": {
+      "radio_max_lanzamiento": 0.04,
+      "rotacion_y_rango": [-10, 10],
+      "altura_z_base": 0.15,
+      "incremento_z_por_voto": 0.05
+    },
+    "simulador": {
+      "substeps_per_frame": 60,
+      "solver_iterations": 30,
+      "frame_start": 1
+    },
+    "escenario": {
+      "intervalo_caida_frames": 100
+    }
+  }
 }

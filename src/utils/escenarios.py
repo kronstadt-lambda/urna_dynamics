@@ -1,63 +1,100 @@
+from pathlib import Path
+from typing import List, Dict, Any, Tuple
 from utils.simuladores import SimuladorFisico
 from utils.randomization import GeneradorAleatorioVotos
 
-class EscenarioVotacion:
+class EscenarioBase:
     """
-    Manager que orquesta la simulación del 'Primer Escenario' (Llenado de urna).
-    Controla el flujo físico secuencial de n votos.
+    Clase base para la gestión de escenarios forenses en Blender.
+
+    Provee la infraestructura común para cualquier tipo de simulación (Llenado,
+    Vaciado, Conteo), gestionando el simulador, el generador estocástico y
+    la persistencia de la memoria de los objetos.
     """
 
-    def __init__(self, simulador: SimuladorFisico, generador: GeneradorAleatorioVotos, datos_votantes: list):
+    def __init__(self, simulador: SimuladorFisico, generador: GeneradorAleatorioVotos, datos_votantes: List[Dict]):
+        """
+        Inicializa los componentes del escenario.
+
+        Args:
+            simulador: Instancia del motor físico universal.
+            generador: Generador de parámetros aleatorios reproducibles.
+            datos_votantes: Lista de diccionarios con la información de los votantes.
+        """
         self.simulador = simulador
         self.generador = generador
         self.datos_votantes = datos_votantes
-        self.votos_en_urna = []
+        self.objetos_en_escena: List[Tuple[Any, Dict]] = []
 
-    def ejecutar_llenado(self, ruta_urna: str, ruta_voto: str) -> list:
-        self.simulador.importar_objeto(ruta_urna, "urna_cylinder", "urna_1")
-        print("[ESCENARIO] Urna inicializada.")
+class EscenarioVotacion(EscenarioBase):
+    """Orquestador del escenario de llenado de urna (Deposición).
 
-        frame_actual = 1
-        intervalo_espera = 100
+    Simula el proceso secuencial de votación, manejando la importación de
+    papeletas, su posicionamiento estocástico y el cálculo de la
+    estratigrafía final resultante.
+    """
 
-        for voto_info in self.datos_votantes:
+    # # Parámetros de control de tiempo (en frames de Blender)
+    # INTERVALO_CAIDA = 100  # Tiempo de espera entre la caída de cada papeleta
+
+    def __init__(self, simulador: SimuladorFisico, generador: GeneradorAleatorioVotos, datos_votantes: List[Dict], intervalo_caida: int = 100):
+        super().__init__(simulador, generador, datos_votantes) # Llama al init de EscenarioBase
+        self.intervalo_caida = intervalo_caida
+
+    def ejecutar_llenado(self, ruta_urna: Path, ruta_voto: Path) -> List[Dict]:
+        """
+        Ejecuta la coreografía completa de votación.
+
+        Args:
+            ruta_urna: Ruta al archivo .blend que contiene el modelo de la urna.
+            ruta_voto: Ruta al archivo .blend con los patrones de doblado.
+
+        Returns:
+            List[Dict]: Dataset completo con la posición y rotación final de cada voto.
+        """
+        # Preparación del entorno
+        self.simulador.importar_activo(ruta_urna, "urna_cylinder", "urna_activa")
+        print(f"[SCENE] Urna inicializada desde: {ruta_urna.name}")
+
+        frame_actual = self.simulador.frame_start
+
+        # Bucle de deposición secuencial (voto por voto)
+        for idx, voto_original in enumerate(self.datos_votantes):
+            # Clonamos el diccionario para no contaminar la memoria global
+            voto_info = voto_original.copy()
+
+            # a) Preparación de metadatos para trazabilidad forense
             orden = voto_info['order']
-            nombre_voto = f"voto_{orden}"
-            print(f"\n[ESCENARIO] Votante {orden} ({voto_info['name_acronym']}) en Frame {frame_actual}...")
+            nombre_instancia = f"voto_{orden}"
 
-            # Selección estocástica del patrón
-            patron_elegido = self.generador.elegir_patron(voto_info['fold_pattern'])
-
-            # Guardamos la selección en el diccionario para pasarlo al CSV después
-            voto_info['fold_pattern_used'] = patron_elegido
+            # b) Selección estocástica del patrón de doblado
+            patron = self.generador.elegir_patron(voto_info['fold_pattern'])
+            voto_info['fold_pattern_used'] = patron
             voto_info['sim_seed'] = self.generador.semilla_usada
 
-            # Importar y posicionar
-            voto = self.simulador.importar_objeto(ruta_voto, patron_elegido, nombre_voto)
-            p = self.generador.obtener_parametros_caida(orden)
+            print(f"[*] Procesando votante {orden}: {voto_info['name_acronym']} (Frame {frame_actual})")
 
-            self.simulador.posicionar_objeto(
-                objeto=voto,
-                loc_x=p['x'],
-                loc_y=p['y'],
-                loc_z=p['z'],
-                rot_y_grados=p['rot_y'],
-                rot_z_grados=p['rot_z']
+            # c) Importación y posicionamiento estocástico
+            voto_obj = self.simulador.importar_activo(ruta_voto, patron, nombre_instancia)
+            p = self.generador.obtener_parametros_caida_libre(orden)
+
+            self.simulador.transformar_objeto(
+                objeto=voto_obj,
+                loc=(p['x'], p['y'], p['z']),
+                rot_grados=(0, p['rot_y'], p['rot_z'])
             )
 
-            self.simulador.programar_caida_secuencial(voto, frame_caida=frame_actual)
-            self.simulador.avanzar_simulacion(frames_a_avanzar=intervalo_espera)
+            # d) Ejecución de la física
+            self.simulador.configurar_animacion_fisica(voto_obj, frame_activacion=frame_actual)
+            self.simulador.ejecutar_pasos_fisica(frames=self.intervalo_caida)
 
-            # Guardamos la tupla (objeto_blender, metadata_json)
-            self.votos_en_urna.append((voto, voto_info))
-            frame_actual += intervalo_espera
+            # e) Almacenar referencia para el análisis final
+            self.objetos_en_escena.append((voto_obj, voto_info))
+            frame_actual += self.intervalo_caida
 
-        print("\n[ESCENARIO] Extrayendo datos de la estratigrafía final...")
-
-        # Extraemos el estado pasando la metadata asociada a cada objeto
-        datos_finales_todos = [
-            self.simulador.obtener_estado_completo(obj, info)
-            for obj, info in self.votos_en_urna
+        # Extracción de resultados estratigráficos
+        print("\n[SCENE] Finalizado. Capturando telemetría final de la pila...")
+        return [
+            self.simulador.capturar_estado_datos(obj, info)
+            for obj, info in self.objetos_en_escena
         ]
-
-        return datos_finales_todos
