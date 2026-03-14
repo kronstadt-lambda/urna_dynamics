@@ -43,9 +43,9 @@ class SimuladorFisico:
         scene.frame_set(self.frame_start) # Reseteamos al Frame 1 para evitar problemas de caché residual
 
         # 1) Limpieza de Objetos y Mallas
-        if bpy.context.object:
-            bpy.ops.object.select_all(action='SELECT') # Seleccionamos todo para eliminarlo
-            bpy.ops.object.delete() # Eliminamos los objetos seleccionados (esto no libera la malla de la RAM!)
+        # Iteramos sobre una copia en forma de lista y usamos el borrado profundo de datos
+        for obj in list(bpy.context.scene.objects):
+            bpy.data.objects.remove(obj, do_unlink=True)
 
         # 2) Reinicio del Rigid Body World (El contenedor de la física)
         if not scene.rigidbody_world:
@@ -63,11 +63,14 @@ class SimuladorFisico:
 
     def _ejecutar_garbage_collector_blender(self) -> None:
         """
-        Elimina bloques de datos (mallas, materiales) que ya no tienen usuarios.
+        Elimina bloques de datos (mallas, materiales, acciones) que ya no tienen usuarios.
         """
+        # Añadimos bpy.data.collections por seguridad extra
         for collection in [bpy.data.meshes, bpy.data.materials,
-                           bpy.data.actions, bpy.data.objects]:
-            for block in collection:
+                           bpy.data.actions, bpy.data.objects, bpy.data.collections]:
+            # LA CLAVE: list(collection) crea una copia temporal.
+            # Así, borrar un elemento no altera el índice del bucle.
+            for block in list(collection):
                 if block.users == 0:
                     collection.remove(block)
 
@@ -261,3 +264,61 @@ class SimuladorFisico:
         ruta_dir.mkdir(parents=True, exist_ok=True)
         bpy.ops.wm.save_as_mainfile(filepath=str(path_final))
         print(f"[AUDITORÍA] Escena base lista para descarga en: {path_final}")
+
+    def configurar_propiedades_superficie(self, objeto: bpy.types.Object, friccion: float, rebote: float) -> None:
+        """
+        Ajusta la fricción y la elasticidad (bounciness) de un cuerpo rígido.
+        """
+        if objeto.rigid_body:
+            objeto.rigid_body.friction = friccion
+            objeto.rigid_body.restitution = rebote # En Blender, 'Bounciness' se llama 'restitution'
+
+    def obtener_frame_actual(self) -> int:
+        """Devuelve el frame actual de la línea de tiempo de la escena."""
+        return bpy.context.scene.frame_current
+
+    def obtener_objeto_mas_cercano(self, coord_ref: tuple, lista_objetos: List[bpy.types.Object]) -> bpy.types.Object:
+        """
+        Encuentra el objeto más cercano a una coordenada 3D dada.
+        Utiliza la distancia euclidiana respecto al centro de masa actual del objeto.
+        """
+        bpy.context.view_layer.update() # Forzar actualización de matrices físicas
+        min_dist = float('inf')
+        obj_cercano = None
+
+        for obj in lista_objetos:
+            # math.dist calcula la distancia entre dos puntos 3D (x,y,z)
+            dist = math.dist(obj.matrix_world.translation, coord_ref)
+            if dist < min_dist:
+                min_dist = dist
+                obj_cercano = obj
+
+        return obj_cercano
+
+    def extraer_objeto_a_coordenada(self, objeto: bpy.types.Object, frame_actual: int, coord_destino: tuple) -> None:
+        """
+        Teletransporta un objeto a una nueva coordenada y desactiva su gravedad,
+        registrando el movimiento en la línea de tiempo.
+        """
+        scene = bpy.context.scene
+        # Aseguramos que Blender extienda su memoria para procesar este nuevo evento
+        if scene.rigidbody_world.point_cache.frame_end < frame_actual + 50:
+            scene.rigidbody_world.point_cache.frame_end = frame_actual + 50
+            scene.frame_end = frame_actual + 50
+
+        # 1. Congelar estado en el frame Inmediatamente Anterior (N-1)
+        # Esto evita que el objeto "resbale" hacia la nueva posición de a pocos.
+        objeto.keyframe_insert(data_path="location", frame=frame_actual - 1)
+        objeto.keyframe_insert(data_path="rotation_euler", frame=frame_actual - 1)
+
+        # 2. Desactivar Dinámica (Volverlo Kinematic = Flota en el aire)
+        if objeto.rigid_body:
+            objeto.rigid_body.kinematic = True
+            objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=frame_actual)
+
+        # 3. Trasposicionar a la nueva coordenada en el Frame Actual (N)
+        objeto.location = coord_destino
+        objeto.rotation_euler = (0, 0, 0) # Lo aplanamos para que apile ordenadamente
+
+        objeto.keyframe_insert(data_path="location", frame=frame_actual)
+        objeto.keyframe_insert(data_path="rotation_euler", frame=frame_actual)

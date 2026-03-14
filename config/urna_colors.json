@@ -1,0 +1,482 @@
+[
+  {
+    "order": 1,
+    "urn": "urn1",
+    "name": "Persona 1",
+    "party": "rosado",
+    "vote": "ROSADO A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 2,
+    "urn": "urn1",
+    "name": "Persona 2",
+    "party": "rosado",
+    "vote": "ROSADO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 3,
+    "urn": "urn1",
+    "name": "Persona 3",
+    "party": "rosado",
+    "vote": "ROSADO A",
+    "fold_pattern": ["voto_4D_patron2"]
+  },
+  {
+    "order": 4,
+    "urn": "urn1",
+    "name": "Persona 4",
+    "party": "rosado",
+    "vote": "ROSADO A",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 5,
+    "urn": "urn1",
+    "name": "Persona 5",
+    "party": "rosado",
+    "vote": "ROSADO A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 6,
+    "urn": "urn1",
+    "name": "Persona 6",
+    "party": "rosado",
+    "vote": "ROSADO B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 7,
+    "urn": "urn1",
+    "name": "Persona 7",
+    "party": "rosado",
+    "vote": "ROSADO B",
+    "fold_pattern": ["voto_2D_patron2b"]
+  },
+  {
+    "order": 8,
+    "urn": "urn1",
+    "name": "Persona 8",
+    "party": "rosado",
+    "vote": "ROSADO B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 9,
+    "urn": "urn1",
+    "name": "Persona 9",
+    "party": "rosado",
+    "vote": "ROSADO B",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 10,
+    "urn": "urn1",
+    "name": "Persona 10",
+    "party": "rosado",
+    "vote": "ROSADO B",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 11,
+    "urn": "urn1",
+    "name": "Persona 11",
+    "party": "rojo",
+    "vote": "ROJO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 12,
+    "urn": "urn1",
+    "name": "Persona 12",
+    "party": "rojo",
+    "vote": "ROJO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 13,
+    "urn": "urn1",
+    "name": "Persona 13",
+    "party": "rojo",
+    "vote": "ROJO A",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 14,
+    "urn": "urn1",
+    "name": "Persona 14",
+    "party": "rojo",
+    "vote": "ROJO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 15,
+    "urn": "urn1",
+    "name": "Persona 15",
+    "party": "rojo",
+    "vote": "ROJO A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 16,
+    "urn": "urn1",
+    "name": "Persona 16",
+    "party": "rojo",
+    "vote": "ROJO B",
+    "fold_pattern": ["voto_2D_patron2a"]
+  },
+  {
+    "order": 17,
+    "urn": "urn1",
+    "name": "Persona 17",
+    "party": "rojo",
+    "vote": "ROJO B",
+    "fold_pattern": ["voto_2D_patron2a"]
+  },
+  {
+    "order": 18,
+    "urn": "urn1",
+    "name": "Persona 18",
+    "party": "rojo",
+    "vote": "ROJO B",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 19,
+    "urn": "urn1",
+    "name": "Persona 19",
+    "party": "rojo",
+    "vote": "ROJO B",
+    "fold_pattern": ["voto_2D_patron2a"]
+  },
+  {
+    "order": 20,
+    "urn": "urn1",
+    "name": "Persona 20",
+    "party": "rojo",
+    "vote": "ROJO B",
+    "fold_pattern": ["voto_2D_patron1b"]
+  },
+  {
+    "order": 21,
+    "urn": "urn1",
+    "name": "Persona 21",
+    "party": "morado",
+    "vote": "MORADO A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 22,
+    "urn": "urn1",
+    "name": "Persona 22",
+    "party": "morado",
+    "vote": "MORADO A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 23,
+    "urn": "urn1",
+    "name": "Persona 23",
+    "party": "morado",
+    "vote": "MORADO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 24,
+    "urn": "urn1",
+    "name": "Persona 24",
+    "party": "morado",
+    "vote": "MORADO A",
+    "fold_pattern": ["voto_2D_patron2a"]
+  },
+  {
+    "order": 25,
+    "urn": "urn1",
+    "name": "Persona 25",
+    "party": "morado",
+    "vote": "MORADO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 26,
+    "urn": "urn1",
+    "name": "Persona 26",
+    "party": "morado",
+    "vote": "MORADO B",
+    "fold_pattern": ["voto_1D_patron1"]
+  },
+  {
+    "order": 27,
+    "urn": "urn1",
+    "name": "Persona 27",
+    "party": "morado",
+    "vote": "MORADO B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 28,
+    "urn": "urn1",
+    "name": "Persona 28",
+    "party": "morado",
+    "vote": "MORADO B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 29,
+    "urn": "urn1",
+    "name": "Persona 29",
+    "party": "morado",
+    "vote": "MORADO B",
+    "fold_pattern": ["voto_2D_patron2b"]
+  },
+  {
+    "order": 30,
+    "urn": "urn1",
+    "name": "Persona 30",
+    "party": "morado",
+    "vote": "MORADO B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 31,
+    "urn": "urn1",
+    "name": "Persona 31",
+    "party": "verde",
+    "vote": "VERDE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 32,
+    "urn": "urn1",
+    "name": "Persona 32",
+    "party": "verde",
+    "vote": "VERDE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 33,
+    "urn": "urn1",
+    "name": "Persona 33",
+    "party": "verde",
+    "vote": "VERDE A",
+    "fold_pattern": ["voto_2D_patron1b"]
+  },
+  {
+    "order": 34,
+    "urn": "urn1",
+    "name": "Persona 34",
+    "party": "verde",
+    "vote": "VERDE A",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 35,
+    "urn": "urn1",
+    "name": "Persona 35",
+    "party": "verde",
+    "vote": "VERDE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 36,
+    "urn": "urn1",
+    "name": "Persona 36",
+    "party": "verde",
+    "vote": "VERDE B",
+    "fold_pattern": ["voto_2D_patron1b"]
+  },
+  {
+    "order": 37,
+    "urn": "urn1",
+    "name": "Persona 37",
+    "party": "verde",
+    "vote": "VERDE B",
+    "fold_pattern": ["voto_2D_patron2a"]
+  },
+  {
+    "order": 38,
+    "urn": "urn1",
+    "name": "Persona 38",
+    "party": "verde",
+    "vote": "VERDE B",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 39,
+    "urn": "urn1",
+    "name": "Persona 39",
+    "party": "verde",
+    "vote": "VERDE B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 40,
+    "urn": "urn1",
+    "name": "Persona 40",
+    "party": "verde",
+    "vote": "VERDE B",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 41,
+    "urn": "urn1",
+    "name": "Persona 41",
+    "party": "celeste",
+    "vote": "CELESTE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 42,
+    "urn": "urn1",
+    "name": "Persona 42",
+    "party": "celeste",
+    "vote": "CELESTE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 43,
+    "urn": "urn1",
+    "name": "Persona 43",
+    "party": "celeste",
+    "vote": "CELESTE A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 44,
+    "urn": "urn1",
+    "name": "Persona 44",
+    "party": "celeste",
+    "vote": "CELESTE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 45,
+    "urn": "urn1",
+    "name": "Persona 45",
+    "party": "celeste",
+    "vote": "CELESTE A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 46,
+    "urn": "urn1",
+    "name": "Persona 46",
+    "party": "celeste",
+    "vote": "CELESTE B",
+    "fold_pattern": ["voto_3D_patron4b"]
+  },
+  {
+    "order": 47,
+    "urn": "urn1",
+    "name": "Persona 47",
+    "party": "celeste",
+    "vote": "CELESTE B",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 48,
+    "urn": "urn1",
+    "name": "Persona 48",
+    "party": "celeste",
+    "vote": "CELESTE B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 49,
+    "urn": "urn1",
+    "name": "Persona 49",
+    "party": "celeste",
+    "vote": "CELESTE B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 50,
+    "urn": "urn1",
+    "name": "Persona 50",
+    "party": "celeste",
+    "vote": "CELESTE B",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 51,
+    "urn": "urn1",
+    "name": "Persona 51",
+    "party": "amarillo",
+    "vote": "AMARILLO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 52,
+    "urn": "urn1",
+    "name": "Persona 52",
+    "party": "amarillo",
+    "vote": "AMARILLO A",
+    "fold_pattern": ["voto_2D_patron2a"]
+  },
+  {
+    "order": 53,
+    "urn": "urn1",
+    "name": "Persona 53",
+    "party": "amarillo",
+    "vote": "AMARILLO A",
+    "fold_pattern": ["voto_3D_patron1b"]
+  },
+  {
+    "order": 54,
+    "urn": "urn1",
+    "name": "Persona 54",
+    "party": "amarillo",
+    "vote": "AMARILLO A",
+    "fold_pattern": ["voto_3D_patron2b"]
+  },
+  {
+    "order": 55,
+    "urn": "urn1",
+    "name": "Persona 55",
+    "party": "amarillo",
+    "vote": "AMARILLO A",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 56,
+    "urn": "urn1",
+    "name": "Persona 56",
+    "party": "amarillo",
+    "vote": "AMARILLO B",
+    "fold_pattern": ["voto_4D_patron2"]
+  },
+  {
+    "order": 57,
+    "urn": "urn1",
+    "name": "Persona 57",
+    "party": "amarillo",
+    "vote": "AMARILLO B",
+    "fold_pattern": ["voto_3D_patron1a"]
+  },
+  {
+    "order": 58,
+    "urn": "urn1",
+    "name": "Persona 58",
+    "party": "amarillo",
+    "vote": "AMARILLO B",
+    "fold_pattern": ["voto_2D_patron1a"]
+  },
+  {
+    "order": 59,
+    "urn": "urn1",
+    "name": "Persona 59",
+    "party": "amarillo",
+    "vote": "AMARILLO B",
+    "fold_pattern": ["voto_2D_patron2b"]
+  },
+  {
+    "order": 60,
+    "urn": "urn1",
+    "name": "Persona 60",
+    "party": "amarillo",
+    "vote": "AMARILLO B",
+    "fold_pattern": ["voto_3D_patron1b"]
+  }
+]

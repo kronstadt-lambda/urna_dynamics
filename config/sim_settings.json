@@ -1,5 +1,5 @@
 {
-  "nombre_experimento": "prueba_estratigrafia_basica",
+  "nombre_experimento": "estratigrafia_forense",
   "archivo_datos_json": "urna1.json",
   "cantidad_simulaciones": 1,
   "archivo_urna_blend": "urna.blend",

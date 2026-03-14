@@ -1,0 +1,36 @@
+{
+  "nombre_experimento": "validacion_estratigrafia",
+  "archivo_datos_json": "urna_colors.json",
+  "cantidad_simulaciones": 20,
+  "archivo_urna_blend": "urna.blend",
+  "archivo_voto_blend": "voto.blend",
+  "guardar_blend_inspeccion": false,
+  "parametros_tecnicos": {
+    "grid_search": {
+      "friccion_min": 0.0,
+      "friccion_max": 1.2,
+      "friccion_step": 0.2,
+      "rebote_min": 0.0,
+      "rebote_max": 0.6,
+      "rebote_step": 0.15
+    },
+    "randomization": {
+      "radio_max_lanzamiento": 0.04,
+      "rotacion_y_rango": [-10, 10],
+      "altura_z_base": 0.15,
+      "incremento_z_por_voto": 0.05
+    },
+    "simulador": {
+      "substeps_per_frame": 10,
+      "solver_iterations": 10,
+      "frame_start": 1
+    },
+    "escenario": {
+      "intervalo_caida_frames": 100,
+      "intervalo_vaciado_frames": 50,
+      "punto_radial_busqueda": [0.0, 0.0, 0.5],
+      "coord_apilamiento_base": [1.0, 1.0, 0.5],
+      "incremento_z_apilamiento": 0.1
+    }
+  }
+}

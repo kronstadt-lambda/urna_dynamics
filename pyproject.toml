@@ -6,7 +6,9 @@ authors = ["kronstadtFedora <kronstadt.lambda@gmail.com>"]
 readme = "README.md"
 packages = [
     { include = "simulations", from = "src" },
-    { include = "utils", from = "src" }
+    { include = "utils", from = "src" },
+    { include = "validation", from = "src" },
+    { include = "graphs", from = "src" }
 ]
 
 [tool.poetry.dependencies]
