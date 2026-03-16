@@ -19,7 +19,7 @@ inyectar_directorio_src()
 from utils.paths import ASSETS_DIR, RESULTS_VOTE_DIR, CONFIG_DIR, SIM_SETTINGS_FILE
 from utils.simuladores import SimuladorFisico
 from utils.randomization import GeneradorAleatorioVotos
-from utils.escenarios import EscenarioVotacion
+from utils.escenarios import EscenarioVotacion, EscenarioVaciado
 
 class GestorExperimentos:
     """
@@ -55,6 +55,8 @@ class GestorExperimentos:
 
         self.archivo_csv = f"auditoria_{self.nombre_urna_actual}_completa.csv"
         self.ruta_csv_completa = self.directorio_salida_vote / self.archivo_csv
+
+        self.archivo_csv_extraccion = f"extraccion_auditoria_{self.nombre_urna_actual}_completa.csv"
 
     def _cargar_configuracion(self) -> dict:
         """
@@ -106,6 +108,10 @@ class GestorExperimentos:
         conf_rand = pt.get("randomization", {})
         conf_sim = pt.get("simulador", {})
         conf_esc = pt.get("escenario", {})
+        conf_phy = pt.get("physics", {})
+
+        friccion = conf_phy.get("friccion", 0.8)
+        rebote = conf_phy.get("rebote", 0.6)
 
         print(f"\n{'='*50}")
         print(f" EXPERIMENTO: {self.nombre_exp.upper()}")
@@ -132,7 +138,9 @@ class GestorExperimentos:
 
             escenario = EscenarioVotacion(
                 simulador, generador, self.datos_votantes,
-                intervalo_caida=conf_esc.get("intervalo_caida_frames", 100)
+                intervalo_caida=conf_esc.get("intervalo_caida_frames", 100),
+                friccion = friccion,
+                rebote = rebote
             )
 
             # Ejecución de la coreografía
@@ -143,6 +151,26 @@ class GestorExperimentos:
                 datos=lista_estados_finales,
                 ruta_dir=self.directorio_salida_vote,
                 archivo=self.archivo_csv
+            )
+
+            escenario_vaciado = EscenarioVaciado(
+                simulador=simulador,
+                generador=generador,
+                datos_votantes=self.datos_votantes,
+                intervalo_vaciado=conf_esc.get("intervalo_vaciado_frames", 50),
+                punto_busqueda=tuple(conf_esc.get("punto_radial_busqueda", [0.0, 0.0, 0.5])),
+                coord_apilamiento=conf_esc.get("coord_apilamiento_base", [1.0, 1.0, 0.5]),
+                inc_z_apilamiento=conf_esc.get("incremento_z_apilamiento", 0.1)
+            )
+
+            # Ejecutamos pasando los objetos físicos que quedaron del llenado
+            lista_votos_extraidos = escenario_vaciado.ejecutar_vaciado(escenario.objetos_en_escena)
+
+            # Persistencia de Datos (Extracción)
+            simulador.guardar_resultado_csv(
+                datos=lista_votos_extraidos,
+                ruta_dir=self.directorio_salida_vote,
+                archivo=self.archivo_csv_extraccion
             )
 
             # Guardado para la siguiente fase (Vaciado e Inspección)

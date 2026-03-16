@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 
 from utils.paths import (
-    VAL_SETTINGS_FILE,
+    CAL_SETTINGS_FILE,
     RESULTS_VOTE_DIR,
     REAL_CSV_NAME,
     EXT_SIMULATION_CSV_NAME,
@@ -58,7 +58,7 @@ def main():
     print("=" * 60)
 
     # 1. Rutas del contexto
-    settings = cargar_configuracion(VAL_SETTINGS_FILE)
+    settings = cargar_configuracion(CAL_SETTINGS_FILE)
     nombre_exp = settings.get("nombre_experimento", "experimento_default")
 
     directorio_exp = RESULTS_VOTE_DIR / nombre_exp

@@ -1,19 +1,18 @@
 import json
-import statistics
 import pandas as pd
 from pathlib import Path
 from collections import defaultdict
 from typing import List, Dict, Any, Tuple, Optional
 
-class ValidadorEstratigrafico:
-    """Motor universal de validación estratigráfica.
+class CalibradorEstratigrafico:
+    """Motor universal de calibracion estratigráfica.
 
     Procesa archivos CSV estandarizados (reales o simulados) para extraer
     métricas físicas de sedimentación y genera comparativas de error (MSE).
     """
 
     def __init__(self):
-        """Inicializa el validador (sin estado). La inyección de datos se hace por método."""
+        """Inicializa el calibrador (sin estado). La inyección de datos se hace por método."""
         pass
 
     def procesar_extraccion_csv(self, ruta_csv_entrada: Path, ruta_json_salida: Path) -> None:
@@ -21,7 +20,7 @@ class ValidadorEstratigrafico:
         Lee un CSV estandarizado, agrupa por Fricción/Rebote y calcula las 3 métricas.
         Guarda el resultado consolidado en un archivo JSON.
         """
-        print(f"\n[VALIDADOR] Procesando archivo: {ruta_csv_entrada.name}...")
+        print(f"\n[CALIBRADOR] Procesando archivo: {ruta_csv_entrada.name}...")
 
         if not ruta_csv_entrada.exists():
             raise FileNotFoundError(f"No se encontró el archivo CSV: {ruta_csv_entrada}")
@@ -94,7 +93,7 @@ class ValidadorEstratigrafico:
         Lee los JSONs de métricas procesadas, calcula el Error Cuadrático Medio (MSE)
         y exporta un CSV ordenado de menor a mayor error.
         """
-        print(f"\n[VALIDADOR] Generando comparativa: {ruta_csv_salida.name}...")
+        print(f"\n[CALIBRADOR] Generando comparativa: {ruta_csv_salida.name}...")
 
         if not ruta_true_json.exists() or not ruta_sim_json.exists():
             print("[ERROR] Faltan los archivos JSON base para realizar la comparación.")
@@ -146,9 +145,6 @@ class ValidadorEstratigrafico:
 
         return suma_cuadrados / n_colores if n_colores > 0 else 0.0
 
-        # ====================================================================
-        # 3. HELPER DE PERSISTENCIA
-        # ====================================================================
     def _guardar_json(self, datos: Dict[str, Any], ruta_salida: Path) -> None:
         """Exportador universal a JSON."""
         ruta_salida.parent.mkdir(parents=True, exist_ok=True)

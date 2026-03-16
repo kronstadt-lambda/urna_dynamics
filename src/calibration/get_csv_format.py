@@ -6,7 +6,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 RUTA_URNA = BASE_DIR / "config" / "urna_colors.json"
 RUTA_RECOPILACION = BASE_DIR / "config" / "recopilacion_fisica.json"
-RUTA_SALIDA = BASE_DIR / "results" / "vote" / "validacion_estratigrafia" / "extraccion_real_estandarizada.csv"
+RUTA_SALIDA = BASE_DIR / "results" / "vote" / "calibracion_estratigrafia" / "extraccion_real_estandarizada.csv"
 
 def estandarizar_datos_reales():
     # 1. Cargar Metadatos de Urna

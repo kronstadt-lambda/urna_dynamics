@@ -16,7 +16,7 @@ def inyectar_directorio_src() -> None:
 # Ejecutamos la función de inyección al inicio del script
 inyectar_directorio_src()
 
-from utils.paths import ASSETS_DIR, RESULTS_VOTE_DIR, CONFIG_DIR, VAL_SETTINGS_FILE
+from utils.paths import ASSETS_DIR, RESULTS_VOTE_DIR, CONFIG_DIR, CAL_SETTINGS_FILE
 from utils.simuladores import SimuladorFisico
 from utils.randomization import GeneradorAleatorioVotos
 from utils.escenarios import EscenarioVotacion, EscenarioVaciado
@@ -29,7 +29,7 @@ class GestorExperimentos:
     y gestiona la reanudación automática de simulaciones interrumpidas.
     """
 
-    def __init__(self, ruta_config: Path = VAL_SETTINGS_FILE):
+    def __init__(self, ruta_config: Path = CAL_SETTINGS_FILE):
         """
         Inicializa el gestor de experimentos con la configuración especificada.
         """

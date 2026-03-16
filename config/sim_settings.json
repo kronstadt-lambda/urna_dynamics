@@ -1,11 +1,15 @@
 {
   "nombre_experimento": "estratigrafia_forense",
   "archivo_datos_json": "urna1.json",
-  "cantidad_simulaciones": 1,
+  "cantidad_simulaciones": 3,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
-  "guardar_blend_inspeccion": true,
+  "guardar_blend_inspeccion": false,
   "parametros_tecnicos": {
+    "physics": {
+      "friccion": 0.8,
+      "rebote": 0.6
+    },
     "randomization": {
       "radio_max_lanzamiento": 0.04,
       "rotacion_y_rango": [-10, 10],
@@ -18,7 +22,11 @@
       "frame_start": 1
     },
     "escenario": {
-      "intervalo_caida_frames": 100
+      "intervalo_caida_frames": 100,
+      "intervalo_vaciado_frames": 50,
+      "punto_radial_busqueda": [0.0, 0.0, 0.5],
+      "coord_apilamiento_base": [1.0, 1.0, 0.5],
+      "incremento_z_apilamiento": 0.1
     }
   }
 }

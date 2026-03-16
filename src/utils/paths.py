@@ -15,7 +15,7 @@ RESULTS_VOTE_DIR = PROJECT_ROOT / "results" / "vote"
 
 # Ruta archivos específicos
 SIM_SETTINGS_FILE = CONFIG_DIR / "sim_settings.json"
-VAL_SETTINGS_FILE = CONFIG_DIR / "val_settings.json"
+CAL_SETTINGS_FILE = CONFIG_DIR / "cal_settings.json"
 PHYS_COMPILATION_FILE = CONFIG_DIR / "recopilacion_fisica.json" # Dataset de resultados reales para validación
 URNA_COLORS_FILE = CONFIG_DIR / "urna_colors.json" # Mapeo de colores a votantes para validación
 

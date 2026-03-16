@@ -2,7 +2,7 @@ import json
 import pandas as pd
 from pathlib import Path
 from utils.paths import (
-    VAL_SETTINGS_FILE,
+    CAL_SETTINGS_FILE,
     RESULTS_VOTE_DIR,
     REAL_CSV_NAME,
     EXT_SIMULATION_CSV_NAME,
@@ -10,7 +10,7 @@ from utils.paths import (
     SIM_METRICS_JSON_NAME,
     COMP_RESULT_CSV_NAME
 )
-from utils.validador import ValidadorEstratigrafico
+from utils.calibrador import CalibradorEstratigrafico
 
 def cargar_configuracion(ruta: Path) -> dict:
     """Lee los hiperparámetros del experimento actual."""
@@ -38,7 +38,7 @@ def main():
     print("=" * 60)
 
     # 1. Preparación del contexto (Rutas)
-    settings = cargar_configuracion(VAL_SETTINGS_FILE)
+    settings = cargar_configuracion(CAL_SETTINGS_FILE)
     nombre_exp = settings.get("nombre_experimento", "experimento_default")
 
     directorio_exp = RESULTS_VOTE_DIR / nombre_exp
@@ -54,7 +54,7 @@ def main():
     ruta_csv_comp = directorio_exp / COMP_RESULT_CSV_NAME
 
     # 2. Inicialización del motor
-    validador = ValidadorEstratigrafico()
+    validador = CalibradorEstratigrafico()
 
     # 3. Procesar Verdad de Campo (Datos Reales)
     if ruta_csv_real.exists():

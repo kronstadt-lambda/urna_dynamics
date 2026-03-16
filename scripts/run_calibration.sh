@@ -13,4 +13,4 @@ PROJECT_ROOT=$(pwd)
 export PYTHONPATH="$PYTHON_PACKAGES:$PROJECT_ROOT/src"
 
 # 5. Ejecutar Blender
-blender -b -P "$PROJECT_ROOT/src/simulations/ejecutar_validacion.py"
+blender -b -P "$PROJECT_ROOT/src/simulations/ejecutar_calibration.py"
