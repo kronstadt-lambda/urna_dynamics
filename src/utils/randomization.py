@@ -38,7 +38,7 @@ class GeneradorAleatorioVotos:
         self.z_base = config.get("altura_z_base", 0.15)
         self.z_inc = config.get("incremento_z_por_voto", 0.05)
 
-    def obtener_parametros_caida_libre(self, orden: int) -> Dict[str, float]:
+    def obtener_parametros_caida_libre(self, indice_local: int, centro_x: float = 0.0, centro_y: float = 0.0) -> Dict[str, float]:
         """
         Calcula las coordenadas y rotaciones iniciales para un voto.
 
@@ -60,15 +60,15 @@ class GeneradorAleatorioVotos:
         r = self.radio_max * math.sqrt(self.random_gen.random())
         theta = self.random_gen.uniform(0, 2 * math.pi)
 
-        loc_x = round(r * math.cos(theta), 3)
-        loc_y = round(r * math.sin(theta), 3)
+        loc_x = round(centro_x + r * math.cos(theta), 3)
+        loc_y = round(centro_y + r * math.sin(theta), 3)
 
         # 2) Rotaciones: Orientación estocástica de la papeleta
         rot_y = round(self.random_gen.uniform(*self.rot_y_rango), 2)
         rot_z = round(self.random_gen.uniform(0, 360), 2)
 
         # 3) Altura Z Dinámica: Asegura que cada papel nazca sobre el anterior
-        loc_z = round(self.z_base + (orden - 1) * self.z_inc, 3)
+        loc_z = round(self.z_base + (indice_local - 1) * self.z_inc, 3)
 
         return {
             "x": loc_x,

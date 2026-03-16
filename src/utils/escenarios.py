@@ -43,7 +43,7 @@ class EscenarioVotacion(EscenarioBase):
         self.friccion = friccion
         self.rebote = rebote
 
-    def ejecutar_llenado(self, ruta_urna: Path, ruta_voto: Path) -> List[Dict]:
+    def ejecutar_llenado(self, ruta_urna: Path, ruta_voto: Path, posiciones_urnas: dict) -> List[Dict]:
         """
         Ejecuta la coreografía completa de votación.
 
@@ -55,10 +55,13 @@ class EscenarioVotacion(EscenarioBase):
             List[Dict]: Dataset completo con la posición y rotación final de cada voto.
         """
         # Preparación del entorno
-        self.simulador.importar_activo(ruta_urna, "urna_cylinder", "urna_activa")
-        print(f"[SCENE] Urna inicializada desde: {ruta_urna.name}")
+        for nombre_urna, coords in posiciones_urnas.items():
+            urna_obj = self.simulador.importar_activo(ruta_urna, "urna_cylinder", f"urna_activa_{nombre_urna}")
+            self.simulador.transformar_objeto(urna_obj, loc=tuple(coords), rot_grados=(0,0,0))
+            print(f"[SCENE] {nombre_urna} inicializada en {coords}")
 
         frame_actual = self.simulador.frame_start
+        contadores_locales = {"urn1": 1, "urn2": 1}
 
         # Bucle de deposición secuencial (voto por voto)
         for idx, voto_original in enumerate(self.datos_votantes):
@@ -69,22 +72,27 @@ class EscenarioVotacion(EscenarioBase):
             voto_info['friction'] = self.friccion
             voto_info['bounciness'] = self.rebote
 
+            urna_destino = voto_info['urn']
+            idx_local = contadores_locales[urna_destino]
+            contadores_locales[urna_destino] += 1
+            pos_urna = posiciones_urnas[urna_destino]
+
             # a) Preparación de metadatos para trazabilidad forense
             orden = voto_info['order']
-            nombre_instancia = f"voto_{orden}"
+            nombre_instancia = f"voto_{urna_destino}_{orden}"
 
             # b) Selección estocástica del patrón de doblado
             patron = self.generador.elegir_patron(voto_info['fold_pattern'])
             voto_info['fold_pattern_used'] = patron
             voto_info['sim_seed'] = self.generador.semilla_usada
 
-            print(f"[*] Procesando votante {orden}: {voto_info['name']} (Frame {frame_actual})")
+            print(f"[*] Procesando votante {orden} -> urna {urna_destino}: {voto_info['name']} (Frame {frame_actual})")
 
             # c) Importación y posicionamiento estocástico
             voto_obj = self.simulador.importar_activo(ruta_voto, patron, nombre_instancia)
             # Aplicar las propiedades físicas al objeto recién importado
             self.simulador.configurar_propiedades_superficie(voto_obj, self.friccion, self.rebote)
-            p = self.generador.obtener_parametros_caida_libre(orden)
+            p = self.generador.obtener_parametros_caida_libre(idx_local, centro_x=pos_urna[0], centro_y=pos_urna[1])
 
             self.simulador.transformar_objeto(
                 objeto=voto_obj,
@@ -123,56 +131,48 @@ class EscenarioVaciado(EscenarioBase):
         self.coord_apilamiento = coord_apilamiento
         self.inc_z_apilamiento = inc_z_apilamiento
 
-    def ejecutar_vaciado(self, objetos_en_escena: List[Tuple[Any, Dict]]) -> List[Dict]:
-        """
-        Ejecuta la coreografía de extracción voto a voto.
-
-        Args:
-            objetos_en_escena: Lista de tuplas (objeto_blender, metadata) proveniente del llenado.
-
-        Returns:
-            List[Dict]: Dataset con el orden exacto en que salieron los votos.
-        """
-        print("\n[SCENE] Iniciando proceso de vaciado estratigráfico...")
+    def ejecutar_vaciado(self, objetos_en_escena: List[Tuple[Any, Dict]], puntos_busqueda: dict) -> List[Dict]:
+        print("\n[SCENE] Iniciando proceso de vaciado secuencial (Urna 1 -> Urna 2)...")
         frame_actual = self.simulador.obtener_frame_actual()
 
-        # Parámetros de la regla de extracción
-        punto_radial_busqueda = self.punto_busqueda
-        coord_apilamiento_base = list(self.coord_apilamiento) # Usamos lista para poder mutar Z
-
-        # Clonamos la lista para ir eliminando los votos que ya sacamos
-        pool_extraccion = list(objetos_en_escena)
+        # El apilamiento se mantiene vivo a través del cambio de urnas
+        coord_apilamiento_base = list(self.coord_apilamiento)
+        rango_salida = 1
         resultados_extraccion = []
-        rango_salida = 1 # El voto que salga primero tendrá rango 1
 
-        while pool_extraccion:
-            # 1. Aplicar Regla: Encontrar el voto más cercano a (0, 0, 0.5)
-            lista_objetos_blender = [item[0] for item in pool_extraccion]
-            obj_elegido = self.simulador.obtener_objeto_mas_cercano(punto_radial_busqueda, lista_objetos_blender)
+        # Forzamos el orden de vaciado
+        orden_urnas = ["urn1", "urn2"]
 
-            # 2. Recuperar su metadata asociada y sacarlo del pool
-            tupla_elegida = next(item for item in pool_extraccion if item[0] == obj_elegido)
-            metadata_voto = tupla_elegida[1].copy()
-            pool_extraccion.remove(tupla_elegida)
+        for urna_actual in orden_urnas:
+            print(f"\n[SCENE] >>> Vaciando {urna_actual.upper()} <<<")
+            punto_radial_busqueda = puntos_busqueda.get(urna_actual, [0,0,0.5])
 
-            print(f"[*] Extrayendo {obj_elegido.name} (Rango de salida {rango_salida}) en Frame {frame_actual}...")
+            # Filtramos solo los votos de la urna que toca
+            pool_extraccion = [item for item in objetos_en_escena if item[1]['urn'] == urna_actual]
 
-            # 3. Extraer y suspender en el aire
-            coord_destino = tuple(coord_apilamiento_base)
-            self.simulador.extraer_objeto_a_coordenada(obj_elegido, frame_actual, coord_destino)
+            while pool_extraccion:
+                lista_objetos_blender = [item[0] for item in pool_extraccion]
+                obj_elegido = self.simulador.obtener_objeto_mas_cercano(tuple(punto_radial_busqueda), lista_objetos_blender)
 
-            # 4. Registrar datos de salida
-            metadata_voto["extraction_rank"] = rango_salida
-            metadata_voto["extract_frame"] = frame_actual
-            resultados_extraccion.append(metadata_voto)
+                tupla_elegida = next(item for item in pool_extraccion if item[0] == obj_elegido)
+                metadata_voto = tupla_elegida[1].copy()
+                pool_extraccion.remove(tupla_elegida)
 
-            # 5. Aumentar Z para que el próximo voto flote 0.1m más arriba
-            coord_apilamiento_base[2] += self.inc_z_apilamiento
+                print(f"[*] Extrayendo de {urna_actual}: {obj_elegido.name} (Global {rango_salida}) en Frame {frame_actual}...")
 
-            # 6. Aplicar dinámica: Avanzar 50 frames para que el agujero dejado colapse por gravedad
-            self.simulador.ejecutar_pasos_fisica(frames=self.intervalo_vaciado)
-            frame_actual += self.intervalo_vaciado
-            rango_salida += 1
+                coord_destino = tuple(coord_apilamiento_base)
+                self.simulador.extraer_objeto_a_coordenada(obj_elegido, frame_actual, coord_destino)
+
+                metadata_voto["extraction_rank"] = rango_salida
+                metadata_voto["extract_frame"] = frame_actual
+                resultados_extraccion.append(metadata_voto)
+
+                # El Z sigue creciendo, unificando la hilera
+                coord_apilamiento_base[2] += self.inc_z_apilamiento
+
+                self.simulador.ejecutar_pasos_fisica(frames=self.intervalo_vaciado)
+                frame_actual += self.intervalo_vaciado
+                rango_salida += 1
 
         print("\n[SCENE] Vaciado completado.")
         return resultados_extraccion
