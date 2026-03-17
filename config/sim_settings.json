@@ -1,7 +1,7 @@
 {
   "nombre_experimento": "estratigrafia_forense",
   "archivos_datos_json": ["urna1.json", "urna2.json"],
-  "cantidad_simulaciones": 2,
+  "cantidad_simulaciones": 3,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
   "archivo_bandeja_blend": "bandeja.blend",
@@ -36,10 +36,12 @@
         "bandeja1": [0.0, 4.0, 0.0],
         "bandeja2": [0.0, -4.0, 0.0]
       },
+      "posicion_final_conteo": [0.0, 0.0, 0.5],
       "intervalo_caida_frames": 50,
       "intervalo_vaciado_frames": 50,
       "intervalo_volcado_frames": 50,
-      "incremento_z_apilamiento": 0.1
+      "incremento_z_apilamiento": 0.1,
+      "tolerancia_busqueda_comodines": 4
     }
   }
 }

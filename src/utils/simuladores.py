@@ -296,3 +296,42 @@ class SimuladorFisico:
         """Mueve la línea de tiempo forzando el recálculo absoluto del Dependency Graph."""
         bpy.context.scene.frame_set(frame)
         bpy.context.view_layer.update()
+
+    def obtener_objeto_por_criterio(self, lista_objetos: List[bpy.types.Object], criterio: str = 'z_max', coord_ref: tuple = None) -> bpy.types.Object:
+        """
+        Encuentra el objeto ideal basado en un criterio espacial.
+
+        Args:
+            lista_objetos: Lista de objetos de Blender ya filtrados por reglas de negocio.
+            criterio: 'z_max' para el objeto más cercano a la superficie (plano XY), o 'euclidiana'.
+            coord_ref: Tupla de coordenadas XYZ, requerida si el criterio es 'euclidiana'.
+        """
+        bpy.context.view_layer.update()
+        if not lista_objetos:
+            return None
+
+        if criterio == 'z_max':
+            # Encuentra el objeto con la mayor altura (coordenada Z)
+            return max(lista_objetos, key=lambda obj: obj.matrix_world.translation.z)
+        elif criterio == 'euclidiana' and coord_ref:
+            # Encuentra el objeto con la menor distancia al punto de referencia
+            return min(lista_objetos, key=lambda obj: math.dist(obj.matrix_world.translation, coord_ref))
+        else:
+            raise ValueError("Criterio no válido o coord_ref faltante para distancia euclidiana.")
+
+    def obtener_candidatos_ordenados(self, lista_objetos: List[bpy.types.Object], criterio: str = 'z_max', coord_ref: tuple = None) -> List[bpy.types.Object]:
+        """
+        Devuelve la lista de objetos ordenada según el criterio de extracción.
+        """
+        bpy.context.view_layer.update()
+        if not lista_objetos:
+            return []
+
+        if criterio == 'z_max':
+            # Ordenar de mayor a menor altura Z (los de arriba primero)
+            return sorted(lista_objetos, key=lambda obj: obj.matrix_world.translation.z, reverse=True)
+        elif criterio == 'euclidiana' and coord_ref:
+            # Ordenar de menor a mayor distancia al punto (el más cercano primero)
+            return sorted(lista_objetos, key=lambda obj: math.dist(obj.matrix_world.translation, coord_ref))
+        else:
+            return lista_objetos

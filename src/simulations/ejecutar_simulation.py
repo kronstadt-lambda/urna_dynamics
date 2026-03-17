@@ -8,6 +8,8 @@ Implementa reanudación automática (resume) basada en CSVs existentes.
 import sys
 import json
 import csv
+import time
+from tqdm import tqdm
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -18,19 +20,22 @@ def inyectar_directorio_src() -> None:
 
 inyectar_directorio_src()
 
-from utils.paths import ASSETS_DIR, RESULTS_VOTE_DIR, CONFIG_DIR, SIM_SETTINGS_FILE
+from utils.paths import ASSETS_DIR, RESULTS_VOTE_DIR, CONFIG_DIR, SIM_SETTINGS_FILE, COUNT_REAL_FILE
 from utils.simuladores import SimuladorFisico
 from utils.randomization import GeneradorAleatorioVotos
-from utils.escenarios import EscenarioVotacion, EscenarioVaciado, EscenarioVolcado
+from utils.escenarios import EscenarioVotacion, EscenarioVaciado, EscenarioVolcado, EscenarioConteo
 
 class GestorExperimentos:
     """
     Controlador de ejecuciones por lote y persistencia de datos.
     Lee archivos de configuración (JSON) y gestiona los directorios de salida.
     """
-    def __init__(self, ruta_config: Path = SIM_SETTINGS_FILE):
+    def __init__(self, ruta_config: Path = SIM_SETTINGS_FILE, ruta_conteo_real: Path = COUNT_REAL_FILE):
         self.ruta_config = ruta_config
         self.settings = self._cargar_configuracion()
+
+        self.ruta_conteo_real = ruta_conteo_real
+        self.datos_conteo_real = self._cargar_conteo_real()
 
         self.nombre_exp = self.settings.get("nombre_experimento", "experimento_default")
         self.cantidad_sims = self.settings["cantidad_simulaciones"]
@@ -54,6 +59,11 @@ class GestorExperimentos:
         self.ruta_csv_completa = self.directorio_salida_vote / self.archivo_csv
         self.archivo_csv_extraccion = "extraccion_auditoria_multi_urna_completa.csv"
         self.archivo_csv_volcado = "volcado_auditoria_bandejas.csv"
+        self.archivo_csv_conteo = "resultado_forense_final.csv"
+
+    def _cargar_conteo_real(self) -> dict:
+        with open(self.ruta_conteo_real, "r", encoding="utf-8") as f:
+            return json.load(f)
 
     def _cargar_configuracion(self) -> dict:
         with open(self.ruta_config, "r", encoding="utf-8") as f:
@@ -68,11 +78,12 @@ class GestorExperimentos:
         return datos_completos
 
     def _obtener_ultimo_sim_id(self) -> int:
-        """Verifica la última iteración procesada en el CSV para auto-reanudación."""
-        if not self.ruta_csv_completa.exists():
+        """Verifica la última iteración procesada en el CSV FINAL para auto-reanudación."""
+        ruta_csv_conteo = self.directorio_salida_vote / self.archivo_csv_conteo
+        if not ruta_csv_conteo.exists():
             return 1
         try:
-            with open(self.ruta_csv_completa, mode='r', encoding='utf-8') as f:
+            with open(ruta_csv_conteo, mode='r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 sim_ids = [int(row['sim_id']) for row in reader if row.get('sim_id', '').isdigit()]
                 if sim_ids:
@@ -101,6 +112,8 @@ class GestorExperimentos:
         posiciones_urnas = conf_esc.get("posiciones_urnas", {})
         puntos_busqueda = conf_esc.get("puntos_busqueda_vaciado", {})
         posiciones_bandejas = conf_esc.get("posiciones_bandejas", {})
+        pos_conteo_final = tuple(conf_esc.get("posicion_final_conteo", [0, 0, 0.5]))
+        inc_z = conf_esc.get("incremento_z_apilamiento", 0.1)
 
         print(f"\n{'='*50}")
         print(f" EXPERIMENTO: {self.nombre_exp.upper()}")
@@ -109,7 +122,12 @@ class GestorExperimentos:
         print(f"{'='*50}\n")
 
         for sim_actual in range(sim_id_inicial, sim_id_final):
-            print(f"[*] Iniciando Simulación {sim_actual}...")
+            tqdm.write(f"\n{'='*50}")
+            tqdm.write(f"[*] INICIANDO SIMULACIÓN {sim_actual} DE {sim_id_final - 1}")
+            tqdm.write(f"{'='*50}")
+
+            # Iniciamos el cronómetro de la simulación
+            tiempo_inicio_sim = time.perf_counter()
 
             simulador = SimuladorFisico(
                 sim_id=sim_actual,
@@ -158,9 +176,36 @@ class GestorExperimentos:
 
             simulador.guardar_resultado_csv(lista_estado_bandejas, self.directorio_salida_vote, self.archivo_csv_volcado)
 
+            # --- FASE 4: Conteo Forense con Validación ---
+            escenario_conteo = EscenarioConteo(
+                simulador=simulador,
+                generador=generador,
+                datos_votantes=self.datos_votantes,
+                datos_conteo_real=self.datos_conteo_real,
+                intervalo_extraccion=conf_esc.get("intervalo_volcado_frames", 50),
+                posicion_final_conteo=pos_conteo_final,
+                inc_z_apilamiento=inc_z,
+                tolerancia_busqueda=conf_esc.get("tolerancia_busqueda_comodines", 3)
+            )
+
+            # Ejecutar con criterio de superficie (z_max)
+            lista_final_conteo = escenario_conteo.ejecutar_conteo(
+                lista_votos_volcados=lista_estado_bandejas,
+                criterio_busqueda='z_max',
+                puntos_busqueda=puntos_busqueda
+            )
+
+            simulador.guardar_resultado_csv(lista_final_conteo, self.directorio_salida_vote, self.archivo_csv_conteo)
+
             if self.guardar_blend:
                 simulador.guardar_escena(self.directorio_salida_vote, f"sim_{sim_actual}_ESCENA_COMPLETA.blend")
                 simulador.guardar_estado_final_como_inicio(self.directorio_salida_vote, f"sim_{sim_actual}_READY_TO_COUNT.blend")
+
+            tiempo_fin_sim = time.perf_counter()
+            tiempo_total = tiempo_fin_sim - tiempo_inicio_sim
+            minutos, segundos = divmod(tiempo_total, 60)
+
+            tqdm.write(f"\n[+] Simulación {sim_actual} finalizada exitosamente en {int(minutos)}m {segundos:.1f}s.")
 
         print("\n[LOTE COMPLETADO] Todas las simulaciones han finalizado correctamente.")
 
