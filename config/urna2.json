@@ -432,16 +432,6 @@
   {
     "order": 44,
     "urn": "urn2",
-    "name": "Gustavo Ortiz",
-    "name_acronym": "GO",
-    "party": "Fuerza Popular",
-    "party_acronym": "FP",
-    "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
-  },
-  {
-    "order": 45,
-    "urn": "urn2",
     "name": "Leslie Olivos",
     "name_acronym": "LO",
     "party": "Fuerza Popular",
@@ -450,7 +440,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 46,
+    "order": 45,
     "urn": "urn2",
     "name": "Ariana Orué",
     "name_acronym": "AO",
@@ -460,7 +450,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 47,
+    "order": 46,
     "urn": "urn2",
     "name": "Flor Medina",
     "name_acronym": "FM",
@@ -470,7 +460,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 48,
+    "order": 47,
     "urn": "urn2",
     "name": "Javier Padilla",
     "name_acronym": "JP",
@@ -480,7 +470,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 49,
+    "order": 48,
     "urn": "urn2",
     "name": "Francis Paredes",
     "name_acronym": "FP",
@@ -490,7 +480,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 50,
+    "order": 49,
     "urn": "urn2",
     "name": "Karol Paredes",
     "name_acronym": "KP",
@@ -500,7 +490,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 51,
+    "order": 50,
     "urn": "urn2",
     "name": "Alex Paredes",
     "name_acronym": "AP",
@@ -510,7 +500,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 52,
+    "order": 51,
     "urn": "urn2",
     "name": "Susel Paredes",
     "name_acronym": "SP",
@@ -520,7 +510,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 53,
+    "order": 52,
     "urn": "urn2",
     "name": "Alfredo Sinche",
     "name_acronym": "AS",
@@ -530,7 +520,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 54,
+    "order": 53,
     "urn": "urn2",
     "name": "Luis Picón",
     "name_acronym": "LP",
@@ -540,7 +530,7 @@
     "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
   },
   {
-    "order": 55,
+    "order": 54,
     "urn": "urn2",
     "name": "Kelly Portalatino",
     "name_acronym": "KP",
@@ -550,7 +540,7 @@
     "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
   },
   {
-    "order": 56,
+    "order": 55,
     "urn": "urn2",
     "name": "Segundo Quiroz",
     "name_acronym": "SQ",
@@ -560,7 +550,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 57,
+    "order": 56,
     "urn": "urn2",
     "name": "Wilson Quispe",
     "name_acronym": "WQ",
@@ -570,7 +560,7 @@
     "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
   },
   {
-    "order": 58,
+    "order": 57,
     "urn": "urn2",
     "name": "Jaime Quito",
     "name_acronym": "JQ",
@@ -580,7 +570,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 59,
+    "order": 58,
     "urn": "urn2",
     "name": "Tania Ramírez",
     "name_acronym": "TR",
@@ -590,7 +580,7 @@
     "fold_pattern": ["voto_4D_patron1", "voto_3D_patron4a", "voto_3D_patron4b"]
   },
   {
-    "order": 60,
+    "order": 59,
     "urn": "urn2",
     "name": "Janet Rivas",
     "name_acronym": "JR",
@@ -600,7 +590,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 61,
+    "order": 60,
     "urn": "urn2",
     "name": "Silvana Robles",
     "name_acronym": "SR",
@@ -610,7 +600,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 62,
+    "order": 61,
     "urn": "urn2",
     "name": "Magaly Ruíz",
     "name_acronym": "MR",
@@ -620,7 +610,7 @@
     "fold_pattern": ["voto_4D_patron2"]
   },
   {
-    "order": 63,
+    "order": 62,
     "urn": "urn2",
     "name": "Eduardo Salhuana",
     "name_acronym": "ES",
@@ -630,7 +620,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 64,
+    "order": 63,
     "urn": "urn2",
     "name": "Wilson Soto",
     "name_acronym": "WS",
@@ -640,7 +630,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 65,
+    "order": 64,
     "urn": "urn2",
     "name": "Germán Tacuri",
     "name_acronym": "GT",
@@ -650,7 +640,7 @@
     "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
   },
   {
-    "order": 66,
+    "order": 65,
     "urn": "urn2",
     "name": "María Taipe",
     "name_acronym": "MT",
@@ -660,7 +650,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 67,
+    "order": 66,
     "urn": "urn2",
     "name": "Nivardo Tello",
     "name_acronym": "NT",
@@ -670,7 +660,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 68,
+    "order": 67,
     "urn": "urn2",
     "name": "Cheryl Trigozo",
     "name_acronym": "CT",
@@ -680,7 +670,7 @@
     "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
   },
   {
-    "order": 69,
+    "order": 68,
     "urn": "urn2",
     "name": "Jorge Zeballos",
     "name_acronym": "JZ",
@@ -690,7 +680,7 @@
     "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
   },
   {
-    "order": 70,
+    "order": 69,
     "urn": "urn2",
     "name": "Carlos Zeballos",
     "name_acronym": "CZ",
@@ -700,7 +690,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 71,
+    "order": 70,
     "urn": "urn2",
     "name": "Ana Zegarra",
     "name_acronym": "AZ",
@@ -710,7 +700,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 72,
+    "order": 71,
     "urn": "urn2",
     "name": "Luis Aragón",
     "name_acronym": "LA",
@@ -720,7 +710,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 73,
+    "order": 72,
     "urn": "urn2",
     "name": "Margot Palacios",
     "name_acronym": "MP",
@@ -730,7 +720,7 @@
     "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
   },
   {
-    "order": 74,
+    "order": 73,
     "urn": "urn2",
     "name": "Hilda Portero",
     "name_acronym": "HP",

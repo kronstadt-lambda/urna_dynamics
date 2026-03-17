@@ -1,3 +1,10 @@
+"""
+Motor Principal de Simulaciones Forenses (Entry Point)
+------------------------------------------------------
+Coordina el ciclo de vida completo: Llenado, Vaciado y Volcado.
+Implementa reanudación automática (resume) basada en CSVs existentes.
+"""
+
 import sys
 import json
 import csv
@@ -14,9 +21,13 @@ inyectar_directorio_src()
 from utils.paths import ASSETS_DIR, RESULTS_VOTE_DIR, CONFIG_DIR, SIM_SETTINGS_FILE
 from utils.simuladores import SimuladorFisico
 from utils.randomization import GeneradorAleatorioVotos
-from utils.escenarios import EscenarioVotacion, EscenarioVaciado
+from utils.escenarios import EscenarioVotacion, EscenarioVaciado, EscenarioVolcado
 
 class GestorExperimentos:
+    """
+    Controlador de ejecuciones por lote y persistencia de datos.
+    Lee archivos de configuración (JSON) y gestiona los directorios de salida.
+    """
     def __init__(self, ruta_config: Path = SIM_SETTINGS_FILE):
         self.ruta_config = ruta_config
         self.settings = self._cargar_configuracion()
@@ -25,13 +36,16 @@ class GestorExperimentos:
         self.cantidad_sims = self.settings["cantidad_simulaciones"]
         self.guardar_blend = self.settings.get("guardar_blend_inspeccion", True)
 
+        # Assets (.blend)
         self.ruta_urna = ASSETS_DIR / self.settings["archivo_urna_blend"]
         self.ruta_voto = ASSETS_DIR / self.settings["archivo_voto_blend"]
+        self.ruta_bandeja = ASSETS_DIR / self.settings["archivo_bandeja_blend"]
 
         # Cargar todos los JSON en una sola lista unificada
         lista_archivos = self.settings.get("archivos_datos_json", ["urna1.json"])
         self.datos_votantes = self._cargar_multiples_json(lista_archivos)
 
+        # Rutas de guardado
         self.directorio_salida_vote = RESULTS_VOTE_DIR / self.nombre_exp
         self.directorio_salida_vote.mkdir(parents=True, exist_ok=True)
 
@@ -39,6 +53,7 @@ class GestorExperimentos:
         self.archivo_csv = "auditoria_multi_urna_completa.csv"
         self.ruta_csv_completa = self.directorio_salida_vote / self.archivo_csv
         self.archivo_csv_extraccion = "extraccion_auditoria_multi_urna_completa.csv"
+        self.archivo_csv_volcado = "volcado_auditoria_bandejas.csv"
 
     def _cargar_configuracion(self) -> dict:
         with open(self.ruta_config, "r", encoding="utf-8") as f:
@@ -53,6 +68,7 @@ class GestorExperimentos:
         return datos_completos
 
     def _obtener_ultimo_sim_id(self) -> int:
+        """Verifica la última iteración procesada en el CSV para auto-reanudación."""
         if not self.ruta_csv_completa.exists():
             return 1
         try:
@@ -66,6 +82,7 @@ class GestorExperimentos:
         return 1
 
     def ejecutar_lote(self) -> None:
+        """Ejecuta el ciclo de vida secuencial del experimento solicitado."""
         rango_pendientes = self._calcular_rango_ejecucion()
         if not rango_pendientes:
             return
@@ -81,8 +98,9 @@ class GestorExperimentos:
         friccion = conf_phy.get("friccion", 0.8)
         rebote = conf_phy.get("rebote", 0.6)
 
-        posiciones_urnas = conf_esc.get("posiciones_urnas", {"urn1": [0.0, 0.0, 0.0]})
-        puntos_busqueda = conf_esc.get("puntos_busqueda_vaciado", {"urn1": [0.0, 0.0, 0.5]})
+        posiciones_urnas = conf_esc.get("posiciones_urnas", {})
+        puntos_busqueda = conf_esc.get("puntos_busqueda_vaciado", {})
+        posiciones_bandejas = conf_esc.get("posiciones_bandejas", {})
 
         print(f"\n{'='*50}")
         print(f" EXPERIMENTO: {self.nombre_exp.upper()}")
@@ -102,6 +120,7 @@ class GestorExperimentos:
 
             generador = GeneradorAleatorioVotos(semilla=sim_actual, config_tecnica=conf_rand)
 
+            # --- FASE 1: Votacion ---
             escenario = EscenarioVotacion(
                 simulador, generador, self.datos_votantes,
                 intervalo_caida=conf_esc.get("intervalo_caida_frames", 100),
@@ -113,12 +132,13 @@ class GestorExperimentos:
 
             simulador.guardar_resultado_csv(lista_estados_finales, self.directorio_salida_vote, self.archivo_csv)
 
+            # --- FASE 2: Vaciado Secuencial ---
             escenario_vaciado = EscenarioVaciado(
                 simulador=simulador,
                 generador=generador,
                 datos_votantes=self.datos_votantes,
                 intervalo_vaciado=conf_esc.get("intervalo_vaciado_frames", 50),
-                coord_apilamiento=conf_esc.get("coord_apilamiento_base", [1.0, 1.0, 0.5]),
+                posiciones_bandejas=posiciones_bandejas,
                 inc_z_apilamiento=conf_esc.get("incremento_z_apilamiento", 0.1)
             )
 
@@ -127,11 +147,20 @@ class GestorExperimentos:
 
             simulador.guardar_resultado_csv(lista_votos_extraidos, self.directorio_salida_vote, self.archivo_csv_extraccion)
 
+            # --- FASE 3: Volcado a Bandejas (Conteo) ---
+            escenario_volcado = EscenarioVolcado(
+                simulador=simulador, generador=generador, datos_votantes=self.datos_votantes,
+                intervalo_volcado=conf_esc.get("intervalo_volcado_frames", 100)
+            )
+
+            # Inyectamos el diccionario de posiciones para las bandejas
+            lista_estado_bandejas = escenario_volcado.ejecutar_volcado(lista_votos_extraidos, self.ruta_bandeja, posiciones_bandejas)
+
+            simulador.guardar_resultado_csv(lista_estado_bandejas, self.directorio_salida_vote, self.archivo_csv_volcado)
+
             if self.guardar_blend:
-                nombre_escena_final = f"multi_urna_sim_{sim_actual}_ESCENA_FINAL.blend"
-                simulador.guardar_escena(self.directorio_salida_vote, nombre_escena_final)
-                nombre_blend = f"multi_urna_sim_{sim_actual}_READY_TO_UNLOAD.blend"
-                simulador.guardar_estado_final_como_inicio(self.directorio_salida_vote, nombre_blend)
+                simulador.guardar_escena(self.directorio_salida_vote, f"sim_{sim_actual}_ESCENA_COMPLETA.blend")
+                simulador.guardar_estado_final_como_inicio(self.directorio_salida_vote, f"sim_{sim_actual}_READY_TO_COUNT.blend")
 
         print("\n[LOTE COMPLETADO] Todas las simulaciones han finalizado correctamente.")
 

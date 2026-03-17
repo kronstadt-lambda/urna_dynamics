@@ -1,3 +1,10 @@
+"""
+Módulo de Escenarios (Capa de Reglas de Negocio)
+------------------------------------------------
+Define las coreografías de Votación, Vaciado, Volcado y Conteo.
+Interactúa exclusivamente mediante interfaces provistas por SimuladorFisico.
+"""
+
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 from utils.simuladores import SimuladorFisico
@@ -8,7 +15,7 @@ class EscenarioBase:
     Clase base para la gestión de escenarios forenses en Blender.
 
     Provee la infraestructura común para cualquier tipo de simulación (Llenado,
-    Vaciado, Conteo), gestionando el simulador, el generador estocástico y
+    Vaciado, Volcado y Conteo), gestionando el simulador, el generador estocástico y
     la persistencia de la memoria de los objetos.
     """
 
@@ -18,7 +25,7 @@ class EscenarioBase:
 
         Args:
             simulador: Instancia del motor físico universal.
-            generador: Generador de parámetros aleatorios reproducibles.
+            generador: Instancia del generador estocástico para parámetros de caída.
             datos_votantes: Lista de diccionarios con la información de los votantes.
         """
         self.simulador = simulador
@@ -34,11 +41,8 @@ class EscenarioVotacion(EscenarioBase):
     estratigrafía final resultante.
     """
 
-    # # Parámetros de control de tiempo (en frames de Blender)
-    # INTERVALO_CAIDA = 100  # Tiempo de espera entre la caída de cada papeleta
-
     def __init__(self, simulador: SimuladorFisico, generador: GeneradorAleatorioVotos, datos_votantes: List[Dict], intervalo_caida: int = 100, friccion: float = 0.5, rebote: float = 0.0):
-        super().__init__(simulador, generador, datos_votantes) # Llama al init de EscenarioBase
+        super().__init__(simulador, generador, datos_votantes)
         self.intervalo_caida = intervalo_caida
         self.friccion = friccion
         self.rebote = rebote
@@ -61,7 +65,7 @@ class EscenarioVotacion(EscenarioBase):
             print(f"[SCENE] {nombre_urna} inicializada en {coords}")
 
         frame_actual = self.simulador.frame_start
-        contadores_locales = {"urn1": 1, "urn2": 1}
+        contadores_locales = {urna: 1 for urna in posiciones_urnas.keys()}
 
         # Bucle de deposición secuencial (voto por voto)
         for idx, voto_original in enumerate(self.datos_votantes):
@@ -124,30 +128,30 @@ class EscenarioVaciado(EscenarioBase):
 
     def __init__(self, simulador: SimuladorFisico, generador: GeneradorAleatorioVotos, datos_votantes: List[Dict],
                  intervalo_vaciado: int = 50, punto_busqueda: tuple = (0.0, 0.0, 0.5),
-                 coord_apilamiento: list = [1.0, 1.0, 0.5], inc_z_apilamiento: float = 0.1):
+                 posiciones_bandejas: dict = None, inc_z_apilamiento: float = 0.1):
         super().__init__(simulador, generador, datos_votantes)
         self.intervalo_vaciado = intervalo_vaciado
         self.punto_busqueda = punto_busqueda
-        self.coord_apilamiento = coord_apilamiento
+        self.posiciones_bandejas = posiciones_bandejas or {}
         self.inc_z_apilamiento = inc_z_apilamiento
 
     def ejecutar_vaciado(self, objetos_en_escena: List[Tuple[Any, Dict]], puntos_busqueda: dict) -> List[Dict]:
-        print("\n[SCENE] Iniciando proceso de vaciado secuencial (Urna 1 -> Urna 2)...")
+        print("\n[SCENE] Iniciando proceso de vaciado secuencial...")
         frame_actual = self.simulador.obtener_frame_actual()
-
-        # El apilamiento se mantiene vivo a través del cambio de urnas
-        coord_apilamiento_base = list(self.coord_apilamiento)
         rango_salida = 1
         resultados_extraccion = []
 
-        # Forzamos el orden de vaciado
+        # Base Z individual inicializada 50cm sobre cada bandeja
+        z_bases = {
+            nombre: coords[2] + 0.5
+            for nombre, coords in self.posiciones_bandejas.items()
+        }
+
         orden_urnas = ["urn1", "urn2"]
 
         for urna_actual in orden_urnas:
             print(f"\n[SCENE] >>> Vaciando {urna_actual.upper()} <<<")
             punto_radial_busqueda = puntos_busqueda.get(urna_actual, [0,0,0.5])
-
-            # Filtramos solo los votos de la urna que toca
             pool_extraccion = [item for item in objetos_en_escena if item[1]['urn'] == urna_actual]
 
             while pool_extraccion:
@@ -158,17 +162,22 @@ class EscenarioVaciado(EscenarioBase):
                 metadata_voto = tupla_elegida[1].copy()
                 pool_extraccion.remove(tupla_elegida)
 
-                print(f"[*] Extrayendo de {urna_actual}: {obj_elegido.name} (Global {rango_salida}) en Frame {frame_actual}...")
+                # Regla de la realidad: 1 al 51 a bandeja 1, resto a bandeja 2
+                nombre_bandeja = "bandeja1" if rango_salida <= 51 else "bandeja2"
+                pos_xy = self.posiciones_bandejas[nombre_bandeja]
 
-                coord_destino = tuple(coord_apilamiento_base)
+                print(f"[*] Extrayendo {obj_elegido.name} (Global {rango_salida}) a {nombre_bandeja} en Frame {frame_actual}...")
+
+                # Destino directo sobre su bandeja correspondiente
+                coord_destino = (pos_xy[0], pos_xy[1], z_bases[nombre_bandeja])
                 self.simulador.extraer_objeto_a_coordenada(obj_elegido, frame_actual, coord_destino)
 
                 metadata_voto["extraction_rank"] = rango_salida
                 metadata_voto["extract_frame"] = frame_actual
                 resultados_extraccion.append(metadata_voto)
 
-                # El Z sigue creciendo, unificando la hilera
-                coord_apilamiento_base[2] += self.inc_z_apilamiento
+                # Incrementamos la altura Z de esa bandeja específica
+                z_bases[nombre_bandeja] += self.inc_z_apilamiento
 
                 self.simulador.ejecutar_pasos_fisica(frames=self.intervalo_vaciado)
                 frame_actual += self.intervalo_vaciado
@@ -176,3 +185,84 @@ class EscenarioVaciado(EscenarioBase):
 
         print("\n[SCENE] Vaciado completado.")
         return resultados_extraccion
+
+class EscenarioVolcado(EscenarioBase):
+    """
+    Orquestador del escenario de volcado a bandejas.
+    Simplemente deja caer los votos que ya fueron posicionados verticalmente
+    sobre las bandejas en la fase de vaciado.
+    """
+    def __init__(self, simulador: SimuladorFisico, generador: GeneradorAleatorioVotos, datos_votantes: List[Dict],
+                 intervalo_volcado: int = 100):
+        super().__init__(simulador, generador, datos_votantes)
+        self.intervalo_volcado = intervalo_volcado
+
+    def ejecutar_volcado(self, lista_votos_extraidos: List[Dict], ruta_bandeja: Path, posiciones_bandejas: dict) -> List[Dict]:
+        print("\n[SCENE] Iniciando proceso de volcado a bandejas (Conteo)...")
+
+        frame_actual = self.simulador.obtener_frame_actual()
+
+        # Importar bandejas
+        for nombre_bandeja, coords in posiciones_bandejas.items():
+            bandeja_obj = self.simulador.importar_activo(ruta_bandeja, "bandeja_amplia", f"instancia_{nombre_bandeja}")
+            self.simulador.transformar_objeto(bandeja_obj, loc=tuple(coords), rot_grados=(0,0,0))
+            print(f"[SCENE] {nombre_bandeja} importada y posicionada en {coords}")
+
+        # Margen de seguridad para estabilizar la memoria de Blender tras la extracción masiva
+        print(f"[*] Aplicando buffer de 200 frames. Saltando del frame {frame_actual} al {frame_actual + 200}...")
+        self.simulador.ejecutar_pasos_fisica(frames=200)
+        frame_actual += 200
+
+        votos_ordenados = sorted(lista_votos_extraidos, key=lambda x: x["extraction_rank"])
+        objetos_procesados = []
+
+        # Únicamente aplicamos gravedad y recolectamos la metadata limpia
+        for metadata_voto in votos_ordenados:
+            rank = metadata_voto["extraction_rank"]
+            nombre_bandeja = "bandeja1" if rank <= 51 else "bandeja2"
+
+            urn = metadata_voto['urn']
+            orden = metadata_voto['order']
+            nombre_instancia = f"voto_{urn}_{orden}"
+            voto_obj = self.simulador.obtener_objeto_por_nombre(nombre_instancia)
+
+            if not voto_obj:
+                continue
+
+            # Delegamos la eliminación del rebote al simulador
+            self.simulador.anular_rebote(voto_obj)
+
+            print(f"[*] Soltando {nombre_instancia} (Extracción #{rank}) sobre {nombre_bandeja} en Frame {frame_actual}")
+
+            # Soltamos el voto exactamente desde donde ya estaba apilado
+            self.simulador.soltar_objeto_suspendido(voto_obj, frame_actual=frame_actual, margen_frames=self.intervalo_volcado)
+
+            # Avanzamos la física para que caiga
+            self.simulador.ejecutar_pasos_fisica(frames=self.intervalo_volcado)
+            frame_actual += self.intervalo_volcado
+
+            # Limpiamos la metadata
+            meta_limpia = metadata_voto.copy()
+            for clave in ["fold_pattern", "fold_pattern_used", "friction", "bounciness", "extract_frame"]:
+                meta_limpia.pop(clave, None)
+            meta_limpia["bandeja_destino"] = nombre_bandeja
+
+            objetos_procesados.append((voto_obj, meta_limpia))
+
+        # --- FASE B: LECTURA AISLADA DEL CSV ---
+        print("\n[SCENE] Dejando asentar la pila y registrando coordenadas finales...")
+
+        # 100 frames extra de estabilización tras el último voto
+        self.simulador.ejecutar_pasos_fisica(frames=100)
+        frame_actual += 100
+
+        # Delegamos la actualización del caché en el frame final al simulador
+        self.simulador.actualizar_escena_a_frame(frame_actual)
+
+        resultados_volcado = []
+        for obj, meta in objetos_procesados:
+            estado_final = self.simulador.capturar_estado_datos(obj, meta)
+            resultados_volcado.append(estado_final)
+
+        print("\n[SCENE] Volcado a bandejas completado.")
+        return resultados_volcado

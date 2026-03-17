@@ -1,3 +1,10 @@
+"""
+Módulo Estocástico (Capa Analítica)
+-----------------------------------
+Garantiza distribuciones aleatorias deterministas (a través de semillas)
+para asegurar la reproducibilidad forense de cada simulacro de votación.
+"""
+
 import random
 import math
 from typing import List, Dict, Optional
@@ -14,11 +21,6 @@ class GeneradorAleatorioVotos:
         semilla_usada (int): Semilla aplicada para la generación actual.
         random_gen (random.Random): Instancia independiente del generador.
     """
-    # # Parámetros físicos de lanzamiento
-    # RADIO_MAX_LANZAMIENTO = 0.04 # Metros: radio del círculo de caída
-    # ROTACION_Y_RANGO = (-10, 10) # Grados: balanceo lateral al soltar
-    # ALTURA_Z_BASE = 0.15         # Metros: altura mínima de inicio
-    # INCREMENTO_Z_POR_VOTO = 0.05 # Metros: separación para evitar colisiones iniciales
 
     def __init__(self, semilla: Optional[int] = None, config_tecnica: Dict = None):
         """
@@ -54,20 +56,18 @@ class GeneradorAleatorioVotos:
                 'rot_y' y 'rot_z'.
         """
 
-        # 1) Posición X/Y: Distribución uniforme en un disco
-        # Para lograr una distribución uniforme en un círculo, no basta con elegir r y theta de forma independiente.
-        # La fórmula correcta es: r = R * sqrt(random()), donde R es el radio
+        # Mapeo uniforme polar-cartesiano (r = R * sqrt(random))
         r = self.radio_max * math.sqrt(self.random_gen.random())
         theta = self.random_gen.uniform(0, 2 * math.pi)
 
         loc_x = round(centro_x + r * math.cos(theta), 3)
         loc_y = round(centro_y + r * math.sin(theta), 3)
 
-        # 2) Rotaciones: Orientación estocástica de la papeleta
+        # Rotaciones estocásticas para añadir caos natural
         rot_y = round(self.random_gen.uniform(*self.rot_y_rango), 2)
         rot_z = round(self.random_gen.uniform(0, 360), 2)
 
-        # 3) Altura Z Dinámica: Asegura que cada papel nazca sobre el anterior
+        # Altura Z Dinámica para asegura que cada papel nazca sobre el anterior
         loc_z = round(self.z_base + (indice_local - 1) * self.z_inc, 3)
 
         return {

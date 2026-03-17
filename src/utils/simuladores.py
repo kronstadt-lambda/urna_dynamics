@@ -1,3 +1,11 @@
+"""
+Módulo de Simulación Física (Capa de Infraestructura)
+-----------------------------------------------------
+Encapsula toda la interacción con el motor de físicas de Blender (Bullet Physics).
+Garantiza que la capa de lógica de negocio (escenarios) no dependa directamente de 'bpy'.
+Maneja la prevención de Memory Leaks y la estabilización del caché de colisiones.
+"""
+
 import bpy
 import math
 import csv
@@ -9,22 +17,20 @@ class SimuladorFisico:
     Orquestador universal del motor de física de Blender (bpy).
 
     Esta clase actúa como el motor central para diversos escenarios forenses
-    (Votación, Vaciado, Conteo). Provee una interfaz limpia para manipular
+    (Votación, Vaciado, Volcado, Conteo). Provee una interfaz limpia para manipular
     objetos 3D, ejecutar cálculos de colisiones y extraer datos de posición
     sin que la lógica del escenario dependa directamente de la API de Blender.
     """
-    # Configuraciones de precisión física (Nivel Forense)
-    # # 120 substeps aseguran que objetos delgados (papeletas) no se atraviesen.
-    # SUBSTEPS_PER_FRAME = 120 # Por defecto es 10
-    # SOLVER_ITERATIONS = 60 # Por defecto es 10
-    # frame_start = 1 # Frame 1 siempre es el punto de partida en la línea de tiempo de Blender
 
     def __init__(self, sim_id: int = 0, substeps: int = 120, solver_iters: int = 60, frame_start: int = 1):
         """
         Inicializa el entorno de simulación purgado y optimizado.
 
         Args:
-            sim_id (int): Identificador para trazabilidad de la corrida actual.
+            sim_id (int): Identificador para la trazabilidad de la simulación actual.
+            substeps (int): Pasos de cálculo por frame (120 evita que papeles se atraviesen).
+            solver_iters (int): Iteraciones del solver para estabilizar colisiones complejas.
+            frame_start (int): Fotograma inicial de la línea de tiempo.
         """
         self.sim_id = sim_id
         self.substeps = substeps
@@ -33,147 +39,112 @@ class SimuladorFisico:
         self._preparar_escena_limpia()
 
     def _preparar_escena_limpia(self) -> None:
-        """
-        Limpia la RAM de Blender y configura el mundo físico desde cero.
+        """Limpia la memoria RAM y configura el mundo físico desde cero."""
+        scene = bpy.context.scene
+        scene.frame_set(self.frame_start)
 
-        Importante para evitar Memory Leaks en ejecuciones masivas (entorno Linux),
-        asegurando que cada simulación inicie con recursos frescos.
-        """
-        scene = bpy.context.scene # Obtenemos la escena activa para manipular su línea de tiempo y mundo físico
-        scene.frame_set(self.frame_start) # Reseteamos al Frame 1 para evitar problemas de caché residual
-
-        # 1) Limpieza de Objetos y Mallas
-        # Iteramos sobre una copia en forma de lista y usamos el borrado profundo de datos
+        # Borrado profundo de objetos para evitar dependencias fantasma
         for obj in list(bpy.context.scene.objects):
             bpy.data.objects.remove(obj, do_unlink=True)
 
-        # 2) Reinicio del Rigid Body World (El contenedor de la física)
+        # Asegurar que el mundo de física exista y esté configurado para alta fidelidad forense
         if not scene.rigidbody_world:
-            bpy.ops.rigidbody.world_add() # Si no existe un mundo de física, lo creamos.
+            bpy.ops.rigidbody.world_add()
 
+        # Configuración del motor de física para evitar que los objetos atraviesen otros (tunneling)
         rbw = scene.rigidbody_world
         rbw.substeps_per_frame = self.substeps
         rbw.solver_iterations = self.solver_iters
         rbw.point_cache.frame_start = self.frame_start
-        rbw.point_cache.frame_end = 250 # Límite inicial, expandible dinámicamente.
+        rbw.point_cache.frame_end = 250
 
-        # 3. Purga de Memoria (Elimina datos huérfanos de la RAM)
+        # Purga de Memoria
         self._ejecutar_garbage_collector_blender()
         bpy.ops.ptcache.free_bake_all()
 
     def _ejecutar_garbage_collector_blender(self) -> None:
-        """
-        Elimina bloques de datos (mallas, materiales, acciones) que ya no tienen usuarios.
-        """
-        # Añadimos bpy.data.collections por seguridad extra
+        """Elimina bloques de datos (mallas, materiales) sin usuarios en memoria."""
         for collection in [bpy.data.meshes, bpy.data.materials,
                            bpy.data.actions, bpy.data.objects, bpy.data.collections]:
-            # LA CLAVE: list(collection) crea una copia temporal.
-            # Así, borrar un elemento no altera el índice del bucle.
             for block in list(collection):
                 if block.users == 0:
                     collection.remove(block)
 
     def importar_activo(self, ruta_blend: Path, nombre_obj: str, nombre_instancia: str) -> bpy.types.Object:
-        """
-        Importa un activo (urna, papeleta, mesa) desde un archivo de assets.
-
-        Args:
-            ruta_blend (Path): Ruta al archivo .blend (usa pathlib).
-            nombre_obj (str): Nombre del objeto dentro del archivo .blend.
-            nombre_instancia (str): Nombre único para esta simulación.
-        """
+        """Importa un objeto 3D desde un archivo .blend externo."""
         dir_interno = str(ruta_blend / "Object")
         bpy.ops.wm.append(
             filepath=str(ruta_blend / "Object" / nombre_obj),
             directory=dir_interno + "/",
             filename=nombre_obj
-        ) # El operador 'append' de Blender importa el objeto y lo selecciona automáticamente
-        obj = bpy.context.selected_objects[0] # El objeto importado es el que queda seleccionado
-        obj.name = nombre_instancia # Renombramos la instancia para evitar conflictos en la escena
+        )
+        obj = bpy.context.selected_objects[0]
+        obj.name = nombre_instancia
         return obj
 
     def transformar_objeto(self, objeto: bpy.types.Object, loc: tuple, rot_grados: tuple) -> None:
-        """
-        Aplica posición y rotación a un objeto en el espacio 3D.
-
-        Args:
-            loc (tuple): Coordenadas (x, y, z).
-            rot_grados (tuple): Rotaciones en grados (x, y, z).
-        """
+        """Aplica coordenadas y rotaciones absolutas a un objeto."""
         objeto.location = loc
         objeto.rotation_euler = [math.radians(d) for d in rot_grados]
 
     def ejecutar_pasos_fisica(self, frames: int = 100) -> None:
         """
-        Avanza la línea de tiempo para calcular interacciones físicas.
-
-        Indispensable en modo Headless para forzar la actualización de matrices.
+        Avanza la línea de tiempo forzando el cálculo físico dinámicamente.
+        Expande el caché de manera automática para evitar que los objetos floten.
         """
-        scene = bpy.context.scene # Obtenemos la escena activa para manipular su línea de tiempo
-        f_final = scene.frame_current + frames # Calculamos el frame final al que queremos avanzar
-        scene.frame_end = max(scene.frame_end, f_final) # Aseguramos que el frame final esté dentro del rango de la línea de tiempo
+        scene = bpy.context.scene
+        f_final = scene.frame_current + frames
+        scene.frame_end = max(scene.frame_end, f_final)
 
-        # Avanzamos frame por frame para que el motor de física calcule las colisiones y actualice las posiciones
+        # Expansión dinámica de la memoria de cálculo (+50 frames de margen)
+        if scene.rigidbody_world and scene.rigidbody_world.point_cache.frame_end < f_final + 50:
+            scene.rigidbody_world.point_cache.frame_end = f_final + 50
+
+        # Recalculamos la física frame por frame
         for frame in range(scene.frame_current, f_final + 1):
             scene.frame_set(frame)
             bpy.context.view_layer.update()
 
     def configurar_animacion_fisica(self, objeto: bpy.types.Object, frame_activacion: int, visible_inicial: bool = False) -> None:
         """
-                Controla cuándo un objeto empieza a ser afectado por la gravedad.
-
-                Utiliza keyframes en la propiedad 'kinematic' para 'soltar' el objeto
-                en el momento preciso del escenario (Votación o Vaciado).
-                """
-        # ====================================================================
-        # [CORRECCIÓN CRÍTICA]: Expansión dinámica del caché de físicas
-        # Obliga a Blender a extender la memoria de cálculo para los nuevos frames
-        # ====================================================================
+        Orquesta la transición de un objeto inmóvil a dinámico (caída libre).
+        Gestiona keyframes de cinemática (Kinematic) y visibilidad.
+        """
         scene = bpy.context.scene
         if scene.rigidbody_world.point_cache.frame_end < frame_activacion + 100:
             scene.rigidbody_world.point_cache.frame_end = frame_activacion + 100
             scene.frame_end = frame_activacion + 100
 
-        # Control Kinematic (True = Inmóvil, False = Dinámico)
+        # Mantenemos el objeto flotando (Kinematic = True) hasta el frame de activación
         objeto.rigid_body.kinematic = True
         objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=1)
 
         if frame_activacion > 1:
             objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=frame_activacion - 1)
 
+        # Liberamos a la gravedad (Kinematic = False)
         objeto.rigid_body.kinematic = False
         objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=frame_activacion)
 
-        # Gestión de visibilidad
+        # Animación de visibilidad
         self._set_visibilidad(objeto, 1, visible_inicial)
         if frame_activacion > 1:
             self._set_visibilidad(objeto, frame_activacion - 1, visible_inicial)
         self._set_visibilidad(objeto, frame_activacion, not visible_inicial)
 
     def _set_visibilidad(self, objeto: bpy.types.Object, frame: int, visible: bool) -> None:
-        """
-        Helper interno para ocultar/mostrar objetos en frames específicos.
-        """
-        ocultar = not visible # Si visible es True, ocultar será False, y viceversa
-        objeto.hide_viewport = ocultar # Controla la visibilidad en el viewport (interfaz de Blender)
-        objeto.hide_render = ocultar # Controla la visibilidad en el render final (importante para inspecciones visuales)
-        objeto.keyframe_insert(data_path="hide_viewport", frame=frame) # Insertamos keyframe para la visibilidad en el viewport
-        objeto.keyframe_insert(data_path="hide_render", frame=frame) # Insertamos keyframe para la visibilidad en el render
+        """Controlador interno para animar el render y viewport."""
+        ocultar = not visible
+        objeto.hide_viewport = ocultar
+        objeto.hide_render = ocultar
+        objeto.keyframe_insert(data_path="hide_viewport", frame=frame)
+        objeto.keyframe_insert(data_path="hide_render", frame=frame)
 
     def capturar_estado_datos(self, objeto: bpy.types.Object, metadatos: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Extrae la telemetría física final y la combina con datos de origen.
-
-        Args:
-            objeto: El objeto de Blender procesado.
-            metadatos: Diccionario con info del votante/papeleta (proveniente de JSON).
-        Returns:
-            Un diccionario combinado listo para guardar en CSV.
-        """
-        bpy.context.view_layer.update() # Forzamos una actualización para asegurarnos de que leemos la posición física real después de la simulación
-        pos = objeto.matrix_world.translation # Extraemos la posición global del objeto en el espacio 3D
-        rot = [math.degrees(a) for a in objeto.matrix_world.to_euler()] # Extraemos la rotación global y la convertimos a grados para mayor legibilidad
+        """Extrae la matriz de transformación absoluta y la une con la metadata del voto."""
+        bpy.context.view_layer.update()
+        pos = objeto.matrix_world.translation
+        rot = [math.degrees(a) for a in objeto.matrix_world.to_euler()]
 
         datos_fisicos = {
             "sim_id": self.sim_id,
@@ -183,81 +154,58 @@ class SimuladorFisico:
         return {**metadatos, **datos_fisicos}
 
     def guardar_resultado_csv(self, datos: List[Dict], ruta_dir: Path, archivo: str) -> None:
-        """
-        Persiste los resultados en un archivo CSV para auditoría estadística.
-        """
+        """Persiste diccionarios de datos a un archivo CSV."""
         if not datos: return
 
         path_csv = ruta_dir / archivo
         ruta_dir.mkdir(parents=True, exist_ok=True)
         existe = path_csv.exists()
 
-        # Escribimos los datos en el CSV, añadiendo la cabecera solo si el archivo no existía previamente
         with open(path_csv, mode='a', newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=datos[0].keys())
             if not existe: writer.writeheader()
             writer.writerows(datos)
 
     def guardar_escena(self, ruta_dir: Path, nombre_archivo: str) -> None:
-        """
-        Guarda la escena actual conservando toda la física y animaciones.
-
-        Este método es fundamental para la auditoría visual, ya que permite
-        inspeccionar la trayectoria completa y las colisiones de las papeletas
-        durante la simulación.
-
-        Args:
-            ruta_dir: Objeto Path al directorio de destino (ej. RESULTS_VOTE_DIR).
-            nombre_archivo: Nombre del archivo (se le añadirá .blend si no lo tiene).
-        """
-        # Rebobinamos al inicio para que al abrir el archivo esté listo para darle 'Play'
+        """Guarda la escena .blend conservando la animación en el caché."""
         bpy.context.scene.frame_set(self.frame_start)
-
-        # Reutilizamos el helper interno para mantener el principio DRY
         self._persistir_escena_blend(ruta_dir, nombre_archivo)
 
     def guardar_estado_final_como_inicio(self, ruta_dir: Path, nombre_archivo: str) -> None:
-        """Fija la posición final de la simulación y crea un punto base para el vaciado.
-
-        Orquestador que coordina la congelación de mallas, el reinicio de la
-        línea de tiempo y la persistencia del archivo de inspección.
-        """
+        """Congela las papeletas en su posición final, lista para iniciar el vaciado."""
         self._congelar_estratigrafia_votos()
         self._resetear_cronologia_y_cache()
         self._persistir_escena_blend(ruta_dir, nombre_archivo)
 
     def _congelar_estratigrafia_votos(self) -> None:
-        """Busca y transforma la física de cada papeleta en coordenadas fijas."""
         for obj in bpy.data.objects:
             if obj.name.startswith("voto_"):
                 self._aplicar_estado_estatico_a_objeto(obj)
 
     def _aplicar_estado_estatico_a_objeto(self, objeto: bpy.types.Object) -> None:
-        """Convierte la transformación visual en real y limpia datos de animación."""
-        # 1. Selección y activación para operaciones de la API de Blender
-        bpy.ops.object.select_all(action='DESELECT')
-        objeto.select_set(True)
-        bpy.context.view_layer.objects.active = objeto
+        """Destruye el historial de animación y clava el objeto en su matriz final."""
+        bpy.context.view_layer.update()
+        matriz_final = objeto.matrix_world.copy()
 
-        # 2. Congelar posición final y eliminar keyframes previos
-        bpy.ops.object.visual_transform_apply()
         if objeto.animation_data:
             objeto.animation_data_clear()
 
-        # 3. Preparar para que sea dinámico en la siguiente etapa (vaciado)
+        objeto.matrix_world = matriz_final
+
+        objeto.keyframe_insert(data_path="location", frame=self.frame_start)
+        objeto.keyframe_insert(data_path="rotation_euler", frame=self.frame_start)
+
         if objeto.rigid_body:
-            objeto.rigid_body.kinematic = False
+            objeto.rigid_body.kinematic = True
+            objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=self.frame_start)
 
     def _resetear_cronologia_y_cache(self) -> None:
-        """Vuelve al inicio de la simulación y purga el caché del motor físico."""
         bpy.context.scene.frame_set(self.frame_start)
         if bpy.context.scene.rigidbody_world:
             bpy.ops.ptcache.free_bake_all()
             bpy.context.scene.rigidbody_world.point_cache.frame_start = self.frame_start
 
     def _persistir_escena_blend(self, ruta_dir: Path, nombre_archivo: str) -> None:
-        """Gestiona la creación del directorio y el guardado físico del archivo .blend."""
-        # Normalización del nombre y ruta con pathlib
         archivo = nombre_archivo if nombre_archivo.endswith(".blend") else f"{nombre_archivo}.blend"
         path_final = ruta_dir / archivo
 
@@ -266,28 +214,20 @@ class SimuladorFisico:
         print(f"[AUDITORÍA] Escena base lista para descarga en: {path_final}")
 
     def configurar_propiedades_superficie(self, objeto: bpy.types.Object, friccion: float, rebote: float) -> None:
-        """
-        Ajusta la fricción y la elasticidad (bounciness) de un cuerpo rígido.
-        """
         if objeto.rigid_body:
             objeto.rigid_body.friction = friccion
-            objeto.rigid_body.restitution = rebote # En Blender, 'Bounciness' se llama 'restitution'
+            objeto.rigid_body.restitution = rebote
 
     def obtener_frame_actual(self) -> int:
-        """Devuelve el frame actual de la línea de tiempo de la escena."""
         return bpy.context.scene.frame_current
 
     def obtener_objeto_mas_cercano(self, coord_ref: tuple, lista_objetos: List[bpy.types.Object]) -> bpy.types.Object:
-        """
-        Encuentra el objeto más cercano a una coordenada 3D dada.
-        Utiliza la distancia euclidiana respecto al centro de masa actual del objeto.
-        """
-        bpy.context.view_layer.update() # Forzar actualización de matrices físicas
+        """Encuentra el objeto más cercano a una coordenada usando distancia euclidiana."""
+        bpy.context.view_layer.update()
         min_dist = float('inf')
         obj_cercano = None
 
         for obj in lista_objetos:
-            # math.dist calcula la distancia entre dos puntos 3D (x,y,z)
             dist = math.dist(obj.matrix_world.translation, coord_ref)
             if dist < min_dist:
                 min_dist = dist
@@ -296,29 +236,63 @@ class SimuladorFisico:
         return obj_cercano
 
     def extraer_objeto_a_coordenada(self, objeto: bpy.types.Object, frame_actual: int, coord_destino: tuple) -> None:
-        """
-        Teletransporta un objeto a una nueva coordenada y desactiva su gravedad,
-        registrando el movimiento en la línea de tiempo.
-        """
+        """Teletransporta un objeto a la hilera vertical de vaciado."""
         scene = bpy.context.scene
-        # Aseguramos que Blender extienda su memoria para procesar este nuevo evento
         if scene.rigidbody_world.point_cache.frame_end < frame_actual + 50:
             scene.rigidbody_world.point_cache.frame_end = frame_actual + 50
             scene.frame_end = frame_actual + 50
 
-        # 1. Congelar estado en el frame Inmediatamente Anterior (N-1)
-        # Esto evita que el objeto "resbale" hacia la nueva posición de a pocos.
+        # Anclamos el objeto a su posición actual un frame antes
         objeto.keyframe_insert(data_path="location", frame=frame_actual - 1)
         objeto.keyframe_insert(data_path="rotation_euler", frame=frame_actual - 1)
 
-        # 2. Desactivar Dinámica (Volverlo Kinematic = Flota en el aire)
         if objeto.rigid_body:
             objeto.rigid_body.kinematic = True
             objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=frame_actual)
 
-        # 3. Trasposicionar a la nueva coordenada en el Frame Actual (N)
+        # Traslación instantánea (sin interpolación visual)
         objeto.location = coord_destino
-        objeto.rotation_euler = (0, 0, 0) # Lo aplanamos para que apile ordenadamente
+        objeto.rotation_euler = (0, 0, 0)
 
         objeto.keyframe_insert(data_path="location", frame=frame_actual)
         objeto.keyframe_insert(data_path="rotation_euler", frame=frame_actual)
+
+    def obtener_objeto_por_nombre(self, nombre: str) -> bpy.types.Object:
+        return bpy.data.objects.get(nombre)
+
+    def soltar_objeto_suspendido(self, objeto: bpy.types.Object, frame_actual: int, margen_frames: int = 100) -> None:
+        """
+        Reactiva la física de un objeto suspendido.
+        Implementa protecciones contra la desactivación automática del motor.
+        """
+        scene = bpy.context.scene
+        frame_limite = frame_actual + margen_frames
+
+        if scene.rigidbody_world.point_cache.frame_end < frame_limite:
+            scene.rigidbody_world.point_cache.frame_end = frame_limite
+            scene.frame_end = frame_limite
+
+        if objeto.rigid_body:
+            # Obliga al motor a evaluar el objeto aunque lleve inactivo miles de frames
+            objeto.rigid_body.use_deactivation = False
+
+            # Anclaje explícito para evitar velocidades fantasma al iniciar gravedad
+            objeto.keyframe_insert(data_path="location", frame=frame_actual - 1)
+            objeto.keyframe_insert(data_path="rotation_euler", frame=frame_actual - 1)
+
+            objeto.rigid_body.kinematic = True
+            objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=frame_actual - 1)
+
+            # Liberación del voto
+            objeto.rigid_body.kinematic = False
+            objeto.rigid_body.keyframe_insert(data_path="kinematic", frame=frame_actual)
+
+    def anular_rebote(self, objeto: bpy.types.Object) -> None:
+        """Elimina el comportamiento elástico para simular manipulación humana."""
+        if objeto.rigid_body:
+            objeto.rigid_body.restitution = 0.0
+
+    def actualizar_escena_a_frame(self, frame: int) -> None:
+        """Mueve la línea de tiempo forzando el recálculo absoluto del Dependency Graph."""
+        bpy.context.scene.frame_set(frame)
+        bpy.context.view_layer.update()
