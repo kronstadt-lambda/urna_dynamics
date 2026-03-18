@@ -1,11 +1,11 @@
 {
-  "nombre_experimento": "estratigrafia_forense",
-  "archivos_datos_json": ["urna1.json", "urna2.json"],
-  "cantidad_simulaciones": 3,
+  "nombre_experimento": "validacion_estratigrafia",
+  "archivos_datos_json": ["urna1_val.json", "urna2_val.json"],
+  "cantidad_simulaciones": 100,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
   "archivo_bandeja_blend": "bandeja.blend",
-  "guardar_blend_inspeccion": true,
+  "guardar_blend_inspeccion": false,
   "parametros_tecnicos": {
     "physics": {
       "friccion": 0.8,
