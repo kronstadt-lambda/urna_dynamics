@@ -1,7 +1,7 @@
 {
-  "nombre_experimento": "validacion_estratigrafia",
+  "nombre_experimento": "validacion_estratigrafia_0.3m_euclidiana",
   "archivos_datos_json": ["urna1_val.json", "urna2_val.json"],
-  "cantidad_simulaciones": 100,
+  "cantidad_simulaciones": 200,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
   "archivo_bandeja_blend": "bandeja.blend",
@@ -9,11 +9,12 @@
   "parametros_tecnicos": {
     "physics": {
       "friccion": 0.8,
-      "rebote": 0.6
+      "rebote": 0.0
     },
     "randomization": {
       "radio_max_lanzamiento": 0.04,
-      "rotacion_y_rango": [-10, 10],
+      "rotacion_x_rango": [-30, 30],
+      "rotacion_y_rango": [-30, 30],
       "altura_z_base": 0.15,
       "incremento_z_por_voto": 0.05
     },
@@ -40,7 +41,8 @@
       "intervalo_vaciado_frames": 50,
       "intervalo_volcado_frames": 50,
       "incremento_z_apilamiento": 0.1,
-      "tolerancia_busqueda_comodines": 5
+      "tolerancia_busqueda_comodines": 5,
+      "criterio_busqueda": "euclidiana"
     }
   }
 }

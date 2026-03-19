@@ -103,7 +103,7 @@ class EscenarioVotacion(EscenarioBase):
                 self.simulador.transformar_objeto(
                     objeto=voto_obj,
                     loc=(p['x'], p['y'], p['z']),
-                    rot_grados=(0, p['rot_y'], p['rot_z'])
+                    rot_grados=(p['rot_x'], p['rot_y'], p['rot_z'])
                 )
 
                 # d) Ejecución de la física
@@ -308,7 +308,7 @@ class EscenarioConteo(EscenarioBase):
             return 0
         return 0
 
-    def ejecutar_conteo(self, lista_votos_volcados: List[Dict], criterio_busqueda: str = 'z_max', puntos_busqueda: dict = None) -> List[Dict]:
+    def ejecutar_conteo(self, lista_votos_volcados: List[Dict], criterio_busqueda: str = 'euclidiana', puntos_busqueda: dict = None) -> List[Dict]:
         tqdm.write(f"\n[SCENE] Iniciando vinculación forense (Tolerancia de capa: {self.tolerancia_busqueda} votos)...")
         frame_actual = self.simulador.obtener_frame_actual()
         pool_disponible = lista_votos_volcados.copy()

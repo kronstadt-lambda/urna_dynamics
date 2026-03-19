@@ -11,6 +11,7 @@ IMAGES_DIR = PROJECT_ROOT / "images"
 ASSETS_DIR = PROJECT_ROOT / "assets"
 SRC_DIR = PROJECT_ROOT / "src"
 GRAPHS_DIR = SRC_DIR / "graphs"
+FILES_DIR = PROJECT_ROOT / "files"
 RESULTS_VOTE_DIR = PROJECT_ROOT / "results" / "vote"
 
 # Ruta archivos específicos

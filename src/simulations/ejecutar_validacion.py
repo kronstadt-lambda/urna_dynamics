@@ -9,6 +9,7 @@ import sys
 import json
 import csv
 import time
+import random
 from tqdm import tqdm
 from pathlib import Path
 from typing import Optional, Tuple
@@ -55,11 +56,10 @@ class GestorExperimentos:
         self.directorio_salida_vote.mkdir(parents=True, exist_ok=True)
 
         # Nombre genérico ya que manejamos múltiples urnas
-        self.archivo_csv = "auditoria_multi_urna_completa.csv"
-        self.ruta_csv_completa = self.directorio_salida_vote / self.archivo_csv
         self.archivo_csv_extraccion = "extraccion_auditoria_multi_urna_completa.csv"
         self.archivo_csv_volcado = "volcado_auditoria_bandejas.csv"
         self.archivo_csv_conteo = "resultado_forense_final.csv"
+        self.ruta_csv_final = self.directorio_salida_vote / self.archivo_csv_conteo
 
     def _cargar_conteo_real(self) -> dict:
         with open(self.ruta_conteo_real, "r", encoding="utf-8") as f:
@@ -114,6 +114,7 @@ class GestorExperimentos:
         posiciones_bandejas = conf_esc.get("posiciones_bandejas", {})
         pos_conteo_final = tuple(conf_esc.get("posicion_final_conteo", [0, 0, 0.5]))
         inc_z = conf_esc.get("incremento_z_apilamiento", 0.1)
+        criterio_busqueda = conf_esc.get("criterio_busqueda", "euclidiana")
 
         print(f"\n{'='*50}")
         print(f" EXPERIMENTO: {self.nombre_exp.upper()}")
@@ -121,9 +122,20 @@ class GestorExperimentos:
         print(f" RANGO: ID {sim_id_inicial} al {sim_id_final - 1}")
         print(f"{'='*50}\n")
 
+        semillas_historicas = self._obtener_semillas_usadas()
+
         for sim_actual in range(sim_id_inicial, sim_id_final):
             tqdm.write(f"\n{'='*50}")
             tqdm.write(f"[*] INICIANDO SIMULACIÓN {sim_actual} DE {sim_id_final - 1}")
+
+            # Lógica de protección y generación de semilla única
+            while True:
+                nueva_semilla = random.randint(1, 10000)
+                if nueva_semilla not in semillas_historicas:
+                    semillas_historicas.add(nueva_semilla)
+                    break
+
+            tqdm.write(f"[*] Semilla asignada: {nueva_semilla}")
             tqdm.write(f"{'='*50}")
 
             # Iniciamos el cronómetro de la simulación
@@ -136,7 +148,7 @@ class GestorExperimentos:
                 frame_start=conf_sim.get("frame_start", 1)
             )
 
-            generador = GeneradorAleatorioVotos(semilla=sim_actual, config_tecnica=conf_rand)
+            generador = GeneradorAleatorioVotos(semilla=nueva_semilla, config_tecnica=conf_rand)
 
             # --- FASE 1: Votacion ---
             escenario = EscenarioVotacion(
@@ -168,7 +180,11 @@ class GestorExperimentos:
             )
 
             # Inyectamos el diccionario de posiciones para las bandejas
-            lista_estado_bandejas = escenario_volcado.ejecutar_volcado(lista_votos_extraidos, self.ruta_bandeja, posiciones_bandejas)
+            lista_estado_bandejas = escenario_volcado.ejecutar_volcado(
+                lista_votos_extraidos,
+                self.ruta_bandeja,
+                posiciones_bandejas
+            )
 
             # --- FASE 4: Conteo Forense con Validación ---
             escenario_conteo = EscenarioConteo(
@@ -185,7 +201,7 @@ class GestorExperimentos:
             # Ejecutar con criterio de superficie (z_max)
             lista_final_conteo = escenario_conteo.ejecutar_conteo(
                 lista_votos_volcados=lista_estado_bandejas,
-                criterio_busqueda='z_max',
+                criterio_busqueda=criterio_busqueda,
                 puntos_busqueda=puntos_busqueda
             )
 
@@ -209,6 +225,20 @@ class GestorExperimentos:
         if sim_id_inicial >= sim_id_final:
             return None
         return sim_id_inicial, sim_id_final
+
+    def _obtener_semillas_usadas(self) -> set:
+        """Lee el CSV principal para recuperar las semillas ya usadas y evitar duplicados forenses."""
+        semillas_usadas = set()
+        if self.ruta_csv_final.exists():
+            try:
+                with open(self.ruta_csv_final, mode='r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        if 'sim_seed' in row and row['sim_seed'].isdigit():
+                            semillas_usadas.add(int(row['sim_seed']))
+            except Exception as e:
+                print(f"[!] No se pudieron leer las semillas previas: {e}")
+        return semillas_usadas
 
 if __name__ == "__main__":
     gestor = GestorExperimentos()

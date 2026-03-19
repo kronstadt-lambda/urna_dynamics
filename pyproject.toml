@@ -8,7 +8,8 @@ packages = [
     { include = "simulations", from = "src" },
     { include = "utils", from = "src" },
     { include = "validation", from = "src" },
-    { include = "graphs", from = "src" }
+    { include = "graphs", from = "src" },
+    { include = "validation", from = "src" }
 ]
 
 [tool.poetry.dependencies]
@@ -20,6 +21,7 @@ matplotlib = "^3.10.8"
 seaborn = "^0.13.2"
 plotly = "^6.6.0"
 tqdm = "^4.67.3"
+statsmodels = "^0.14.6"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

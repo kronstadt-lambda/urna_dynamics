@@ -36,7 +36,8 @@ class GeneradorAleatorioVotos:
         # Asignar parámetros dinámicos (con valores por defecto por seguridad)
         config = config_tecnica or {}
         self.radio_max = config.get("radio_max_lanzamiento", 0.04)
-        self.rot_y_rango = config.get("rotacion_y_rango", [-10, 10])
+        self.rot_x_rango = config.get("rotacion_y_rango", [-30, 30])
+        self.rot_y_rango = config.get("rotacion_y_rango", [-30, 30])
         self.z_base = config.get("altura_z_base", 0.15)
         self.z_inc = config.get("incremento_z_por_voto", 0.05)
 
@@ -64,6 +65,7 @@ class GeneradorAleatorioVotos:
         loc_y = round(centro_y + r * math.sin(theta), 3)
 
         # Rotaciones estocásticas para añadir caos natural
+        rot_x = round(self.random_gen.uniform(*self.rot_x_rango), 2)
         rot_y = round(self.random_gen.uniform(*self.rot_y_rango), 2)
         rot_z = round(self.random_gen.uniform(0, 360), 2)
 
@@ -74,6 +76,7 @@ class GeneradorAleatorioVotos:
             "x": loc_x,
             "y": loc_y,
             "z": loc_z,
+            "rot_x": rot_x,
             "rot_y": rot_y,
             "rot_z": rot_z
         }
