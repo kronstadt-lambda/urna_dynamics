@@ -1,0 +1,114 @@
+urn,order,name,party_acronym,vote
+urn1,1,María Agüero,PL,OPCION 4
+urn1,2,Alejandro Aguinaga,FP,INDETERMINADO
+urn1,3,Yorel Alcarraz,SP,INDETERMINADO
+urn1,4,Luis Alegría,FP,OPCION 2
+urn1,5,José Balcázar,PL,OPCION 4
+urn1,6,Nilza Chacón,FP,INDETERMINADO
+urn1,7,Luis Cordero,APP,INDETERMINADO
+urn1,8,Isabel Cortez,NA,INDETERMINADO
+urn1,9,Flavio Cruz,PL,OPCION 4
+urn1,10,José Cueto,RP,INDETERMINADO
+urn1,11,Pasión Dávila,BS,OPCION 4
+urn1,12,Hamlet Echeverría,JPP,OPCION 4
+urn1,13,Jorge Flores,APP,INDETERMINADO
+urn1,14,Alex Flores,BS,OPCION 4
+urn1,15,Víctor Flores,FP,INDETERMINADO
+urn1,16,Idelso García,APP,INDETERMINADO
+urn1,17,Nelcy Heidinger,APP,INDETERMINADO
+urn1,18,Mery Infantes,FP,INDETERMINADO
+urn1,19,Patricia Juárez,FP,INDETERMINADO
+urn1,20,Judith Laura,PP,INDETERMINADO
+urn1,21,George Málaga,NA,INDETERMINADO
+urn1,22,Jorge Marticorena,APP,INDETERMINADO
+urn1,23,Esdras Medina,RP,INDETERMINADO
+urn1,24,Segundo Montalvo,PL,INDETERMINADO
+urn1,25,Auristela Obando,FP,INDETERMINADO
+urn1,26,César Revilla,FP,INDETERMINADO
+urn1,27,Abel Reyes,PL,OPCION 4
+urn1,28,Magally Santisteban,FP,INDETERMINADO
+urn1,29,Rosio Torres,APP,INDETERMINADO
+urn1,30,Adriana Tudela,AvP,INDETERMINADO
+urn1,31,Jhakeline Ugarte,JPP,OPCION 4
+urn1,32,Héctor Valer,SP,INDETERMINADO
+urn1,33,Elías Varas,JPP,OPCION 4
+urn1,34,Elvis Vergara,AP,INDETERMINADO
+urn1,35,José Williams,AvP,INDETERMINADO
+urn1,36,Norma Yarrow,RP,INDETERMINADO
+urn1,37,Óscar Zea,SP,INDETERMINADO
+urn1,38,Mary Acuña,APP,INDETERMINADO
+urn1,39,Segundo Acuña,HyD,INDETERMINADO
+urn1,40,Patricia Chirinos,RP,OPCION 4
+urn2,1,Fernando Rospigliosi,FP,INDETERMINADO
+urn2,2,Waldemar Cerrón,PL,OPCION 4
+urn2,3,Ilich López,AP,OPCION 2
+urn2,4,Lady Camones,APP,INDETERMINADO
+urn2,5,Alejandro Cavero,AvP,INDETERMINADO
+urn2,6,Maria del Carmen Alva,AP,OPCION 2
+urn2,7,Carlos Alva,AP,INDETERMINADO
+urn2,8,Rosselli Amuruz,AvP,INDETERMINADO
+urn2,9,José Arriola,PP,INDETERMINADO
+urn2,10,Alfredo Azurín,SP,INDETERMINADO
+urn2,11,Rosangella Barbarán,FP,INDETERMINADO
+urn2,12,Diego Bazán,RP,INDETERMINADO
+urn2,13,Guido Bellido,PP,INDETERMINADO
+urn2,14,Juan Burgos,PP,INDETERMINADO
+urn2,15,Ernesto Bustamante,FP,INDETERMINADO
+urn2,16,Eduardo Castillo,FP,INDETERMINADO
+urn2,17,Roberto Chiabra,APP,INDETERMINADO
+urn2,18,Miguel Ciccia,RP,INDETERMINADO
+urn2,19,María Córdova,RP,INDETERMINADO
+urn2,20,Victor Cutipa,JPP,OPCION 4
+urn2,21,Raúl Doroteo,NA,INDETERMINADO
+urn2,22,Gladys Echaíz,HyD,INDETERMINADO
+urn2,23,Jhaec Espinoza,PP,INDETERMINADO
+urn2,24,Diana Gonzáles,AvP,INDETERMINADO
+urn2,25,Paul Gutiérrez,SP,INDETERMINADO
+urn2,26,Noelia Herrera,RP,INDETERMINADO
+urn2,27,Raúl Huamán,FP,INDETERMINADO
+urn2,28,María Jáuregui,RP,INDETERMINADO
+urn2,29,Heidy Juárez,PP,INDETERMINADO
+urn2,30,Elva Julon,APP,INDETERMINADO
+urn2,31,Nieves Limachi,JPP,OPCION 4
+urn2,32,Juan Lizarzaburu,APP,INDETERMINADO
+urn2,33,Jeny López,FP,INDETERMINADO
+urn2,34,José Luna,PP,INDETERMINADO
+urn2,35,Pedro Martínez,AP,OPCION 2
+urn2,36,Elizabeth Medina,SP,INDETERMINADO
+urn2,37,Isaac Mita,PL,OPCION 4
+urn2,38,Silvia Monteza,AP,INDETERMINADO
+urn2,39,Jorge Montoya,HyD,INDETERMINADO
+urn2,40,Jorge Morante,SP,INDETERMINADO
+urn2,41,Juan Mori,FP,INDETERMINADO
+urn2,42,Martha Moyano,FP,INDETERMINADO
+urn2,43,Alejandro Muñante,RP,INDETERMINADO
+urn2,44,Leslie Olivos,FP,INDETERMINADO
+urn2,45,Ariana Orué,PP,INDETERMINADO
+urn2,46,Flor Medina,NA,INDETERMINADO
+urn2,47,Javier Padilla,HyD,INDETERMINADO
+urn2,48,Francis Paredes,PP,INDETERMINADO
+urn2,49,Karol Paredes,AvP,INDETERMINADO
+urn2,50,Alex Paredes,SP,INDETERMINADO
+urn2,51,Susel Paredes,BDP,INDETERMINADO
+urn2,52,Alfredo Sinche,BS,OPCION 4
+urn2,53,Luis Picón,PP,INDETERMINADO
+urn2,54,Kelly Portalatino,PL,OPCION 4
+urn2,55,Segundo Quiroz,APP,INDETERMINADO
+urn2,56,Wilson Quispe,JPP,OPCION 4
+urn2,57,Jaime Quito,BS,OPCION 4
+urn2,58,Tania Ramírez,FP,INDETERMINADO
+urn2,59,Janet Rivas,PL,OPCION 4
+urn2,60,Silvana Robles,BS,OPCION 4
+urn2,61,Magaly Ruíz,APP,INDETERMINADO
+urn2,62,Eduardo Salhuana,APP,INDETERMINADO
+urn2,63,Wilson Soto,AP,INDETERMINADO
+urn2,64,Germán Tacuri,JPP,OPCION 4
+urn2,65,María Taipe,PL,OPCION 4
+urn2,66,Nivardo Tello,PP,INDETERMINADO
+urn2,67,Cheryl Trigozo,RP,INDETERMINADO
+urn2,68,Jorge Zeballos,RP,INDETERMINADO
+urn2,69,Carlos Zeballos,BDP,INDETERMINADO
+urn2,70,Ana Zegarra,SP,INDETERMINADO
+urn2,71,Luis Aragón,AP,INDETERMINADO
+urn2,72,Margot Palacios,NA,INDETERMINADO
+urn2,73,Hilda Portero,AP,INDETERMINADO

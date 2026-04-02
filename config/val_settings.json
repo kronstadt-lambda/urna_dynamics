@@ -1,10 +1,10 @@
 {
-  "nombre_experimento": "validacion_estratigrafia_0.3m_euclidiana",
+  "nombre_experimento": "validacion_estratigrafia_0.7m_euclidiana_patron3a1",
   "archivos_datos_json": ["urna1_val.json", "urna2_val.json"],
-  "cantidad_simulaciones": 200,
+  "cantidad_simulaciones": 100,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
-  "archivo_bandeja_blend": "bandeja.blend",
+  "archivo_bandeja_blend": "bandeja_70cm.blend",
   "guardar_blend_inspeccion": false,
   "parametros_tecnicos": {
     "physics": {
@@ -29,19 +29,23 @@
         "urn2": [-3.0, 0.0, 1.54]
       },
       "puntos_busqueda_vaciado": {
-        "urn1": [3.0, 0.0, 0.5],
-        "urn2": [-3.0, 0.0, 0.5]
+        "urn1": [3.0, 0.0, 1.0],
+        "urn2": [-3.0, 0.0, 1.0]
       },
       "posiciones_bandejas": {
         "bandeja1": [0.0, 4.0, 0.0],
         "bandeja2": [0.0, -4.0, 0.0]
+      },
+      "puntos_busqueda_conteo": {
+        "bandeja1": [0.0, 4.0, 1.0],
+        "bandeja2": [0.0, -4.0, 1.0]
       },
       "posicion_final_conteo": [0.0, 0.0, 0.5],
       "intervalo_caida_frames": 50,
       "intervalo_vaciado_frames": 50,
       "intervalo_volcado_frames": 50,
       "incremento_z_apilamiento": 0.1,
-      "tolerancia_busqueda_comodines": 5,
+      "tolerancia_busqueda_comodines": 3,
       "criterio_busqueda": "euclidiana"
     }
   }

@@ -112,6 +112,7 @@ class GestorExperimentos:
         posiciones_urnas = conf_esc.get("posiciones_urnas", {})
         puntos_busqueda = conf_esc.get("puntos_busqueda_vaciado", {})
         posiciones_bandejas = conf_esc.get("posiciones_bandejas", {})
+        puntos_busqueda_conteo = conf_esc.get("puntos_busqueda_conteo", {})
         pos_conteo_final = tuple(conf_esc.get("posicion_final_conteo", [0, 0, 0.5]))
         inc_z = conf_esc.get("incremento_z_apilamiento", 0.1)
         criterio_busqueda = conf_esc.get("criterio_busqueda", "euclidiana")
@@ -202,7 +203,7 @@ class GestorExperimentos:
             lista_final_conteo = escenario_conteo.ejecutar_conteo(
                 lista_votos_volcados=lista_estado_bandejas,
                 criterio_busqueda=criterio_busqueda,
-                puntos_busqueda=puntos_busqueda
+                puntos_busqueda=puntos_busqueda_conteo
             )
 
             simulador.guardar_resultado_csv(lista_final_conteo, self.directorio_salida_vote, self.archivo_csv_conteo)

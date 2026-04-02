@@ -7,7 +7,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 2,
@@ -17,7 +17,7 @@
     "party": "Perú Libre",
     "party_acronym": "PL",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 3,
@@ -27,7 +27,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "OPCION 2",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 4,
@@ -37,7 +37,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 5,
@@ -47,7 +47,7 @@
     "party": "Avanza País",
     "party_acronym": "AvP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 6,
@@ -57,7 +57,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "OPCION 2",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 7,
@@ -67,7 +67,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 8,
@@ -77,7 +77,7 @@
     "party": "Avanza País",
     "party_acronym": "AvP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 9,
@@ -87,7 +87,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 10,
@@ -97,7 +97,7 @@
     "party": "Somos Perú",
     "party_acronym": "SP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 11,
@@ -107,7 +107,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 12,
@@ -117,17 +117,17 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 13,
     "urn": "urn2",
     "name": "Guido Bellido",
-    "name_acronym": "GR",
+    "name_acronym": "GB",
     "party": "Podemos Perú",
-    "party_acronym": "FP",
+    "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 14,
@@ -137,7 +137,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 15,
@@ -147,7 +147,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 16,
@@ -157,7 +157,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 17,
@@ -167,7 +167,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 18,
@@ -177,7 +177,7 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_1D_patron1"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 19,
@@ -187,7 +187,7 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 20,
@@ -197,7 +197,7 @@
     "party": "Juntos por el Perú",
     "party_acronym": "JPP",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 21,
@@ -207,7 +207,7 @@
     "party": "No agrupado",
     "party_acronym": "NA",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 22,
@@ -217,7 +217,7 @@
     "party": "Honor y Democracia",
     "party_acronym": "HyD",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_4D_patron2"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 23,
@@ -227,7 +227,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 24,
@@ -237,7 +237,7 @@
     "party": "Avanza País",
     "party_acronym": "AvP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 25,
@@ -247,7 +247,7 @@
     "party": "Somos Perú",
     "party_acronym": "SP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 26,
@@ -257,7 +257,7 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 27,
@@ -267,7 +267,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 28,
@@ -277,7 +277,7 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_4D_patron2"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 29,
@@ -287,7 +287,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 30,
@@ -297,7 +297,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 31,
@@ -307,7 +307,7 @@
     "party": "Juntos por el Perú",
     "party_acronym": "JPP",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 32,
@@ -317,7 +317,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 33,
@@ -327,7 +327,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 34,
@@ -337,7 +337,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 35,
@@ -347,7 +347,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "OPCION 2",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 36,
@@ -357,7 +357,7 @@
     "party": "Somos Perú",
     "party_acronym": "SP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 37,
@@ -367,7 +367,7 @@
     "party": "Perú Libre",
     "party_acronym": "PL",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 38,
@@ -377,7 +377,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 39,
@@ -387,7 +387,7 @@
     "party": "Honor y Democracia",
     "party_acronym": "HyD",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_4D_patron2"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 40,
@@ -397,7 +397,7 @@
     "party": "Somos Perú",
     "party_acronym": "SP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 41,
@@ -405,9 +405,9 @@
     "name": "Juan Mori",
     "name_acronym": "JM",
     "party": "Acción Popular",
-    "party_acronym": "FP",
+    "party_acronym": "AP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 42,
@@ -417,7 +417,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 43,
@@ -427,17 +427,17 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 44,
     "urn": "urn2",
     "name": "Leslie Olivos",
     "name_acronym": "LO",
-    "party": "Fuerza Popular",
-    "party_acronym": "FP",
+    "party": "No agrupado",
+    "party_acronym": "NA",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 45,
@@ -447,7 +447,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 46,
@@ -457,7 +457,7 @@
     "party": "No agrupado",
     "party_acronym": "NA",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 47,
@@ -467,7 +467,7 @@
     "party": "Honor y Democracia",
     "party_acronym": "HyD",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 48,
@@ -477,7 +477,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 49,
@@ -487,7 +487,7 @@
     "party": "Avanza País",
     "party_acronym": "AvP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 50,
@@ -497,7 +497,7 @@
     "party": "Somos Perú",
     "party_acronym": "SP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 51,
@@ -507,7 +507,7 @@
     "party": "Bloque Democrático Popular",
     "party_acronym": "BDP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 52,
@@ -517,7 +517,7 @@
     "party": "Bancada Socialista",
     "party_acronym": "BS",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 53,
@@ -527,7 +527,7 @@
     "party": "Podemos Perú",
     "party_acronym": "PP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 54,
@@ -537,7 +537,7 @@
     "party": "Perú Libre",
     "party_acronym": "PL",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 55,
@@ -547,7 +547,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 56,
@@ -557,7 +557,7 @@
     "party": "Juntos por el Perú",
     "party_acronym": "JPP",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 57,
@@ -567,7 +567,7 @@
     "party": "Bancada Socialista",
     "party_acronym": "BS",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 58,
@@ -577,7 +577,7 @@
     "party": "Fuerza Popular",
     "party_acronym": "FP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_4D_patron1", "voto_3D_patron4a", "voto_3D_patron4b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 59,
@@ -587,7 +587,7 @@
     "party": "Perú Libre",
     "party_acronym": "PL",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 60,
@@ -597,7 +597,7 @@
     "party": "Bancada Socialista",
     "party_acronym": "BS",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 61,
@@ -607,7 +607,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_4D_patron2"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 62,
@@ -617,7 +617,7 @@
     "party": "Alianza para el Progreso",
     "party_acronym": "APP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 63,
@@ -627,7 +627,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 64,
@@ -637,7 +637,7 @@
     "party": "Juntos por el Perú",
     "party_acronym": "JPP",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 65,
@@ -647,17 +647,17 @@
     "party": "Perú Libre",
     "party_acronym": "PL",
     "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 66,
     "urn": "urn2",
     "name": "Nivardo Tello",
     "name_acronym": "NT",
-    "party": "Perú Libre",
-    "party_acronym": "PL",
-    "vote": "OPCION 4",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "party": "Podemos Perú",
+    "party_acronym": "PP",
+    "vote": "INDETERMINADO",
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 67,
@@ -667,7 +667,7 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 68,
@@ -677,7 +677,7 @@
     "party": "Renovación Popular",
     "party_acronym": "RP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 69,
@@ -687,7 +687,7 @@
     "party": "Bloque Democrático Popular",
     "party_acronym": "BDP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 70,
@@ -697,7 +697,7 @@
     "party": "Somos Perú",
     "party_acronym": "SP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 71,
@@ -707,7 +707,7 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 72,
@@ -717,7 +717,7 @@
     "party": "No agrupado",
     "party_acronym": "NA",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_3D_patron1a", "voto_3D_patron1b", "voto_3D_patron2a", "voto_3D_patron2b", "voto_3D_patron3a", "voto_3D_patron3b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   },
   {
     "order": 73,
@@ -727,6 +727,6 @@
     "party": "Acción Popular",
     "party_acronym": "AP",
     "vote": "INDETERMINADO",
-    "fold_pattern": ["voto_2D_patron1a", "voto_2D_patron1b", "voto_2D_patron2a", "voto_2D_patron2b"]
+    "fold_pattern": ["voto_3D_patron1a"]
   }
 ]

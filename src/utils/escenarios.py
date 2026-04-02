@@ -8,8 +8,8 @@ Interactúa exclusivamente mediante interfaces provistas por SimuladorFisico.
 from tqdm import tqdm
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
-from utils.simuladores import SimuladorFisico
 from utils.randomization import GeneradorAleatorioVotos
+from utils.simuladores import SimuladorFisico
 
 class EscenarioBase:
     """
@@ -96,6 +96,7 @@ class EscenarioVotacion(EscenarioBase):
 
                 # c) Importación y posicionamiento estocástico
                 voto_obj = self.simulador.importar_activo(ruta_voto, patron, nombre_instancia)
+
                 # Aplicar las propiedades físicas al objeto recién importado
                 self.simulador.configurar_propiedades_superficie(voto_obj, self.friccion, self.rebote)
                 p = self.generador.obtener_parametros_caida_libre(idx_local, centro_x=pos_urna[0], centro_y=pos_urna[1])
@@ -318,7 +319,7 @@ class EscenarioConteo(EscenarioBase):
         with tqdm(total=len(self.datos_conteo_real), desc="4/4 Conteo  ", unit="voto", leave=True, bar_format='{l_bar}{bar:30}{r_bar}') as pbar:
             for evento_real in self.datos_conteo_real:
                 orden = evento_real["orden_conteo"]
-                bandeja_esperada = "bandeja1" if orden <= 51 else "bandeja2"
+                bandeja_esperada = evento_real.get("bandeja_origen", "bandeja1" if orden <= 51 else "bandeja2")
                 voto_esperado = evento_real["voto_observado"]
 
                 pbar.set_postfix({
@@ -331,7 +332,11 @@ class EscenarioConteo(EscenarioBase):
                 objetos_map = {self.simulador.obtener_objeto_por_nombre(f"voto_{v['urn']}_{v['order']}"): v for v in candidatos_fisicos}
                 lista_objs = [obj for obj in objetos_map.keys() if obj is not None]
 
-                coord_ref = puntos_busqueda.get(bandeja_esperada) if puntos_busqueda else None
+                if puntos_busqueda and bandeja_esperada in puntos_busqueda:
+                    coord_ref = tuple(puntos_busqueda[bandeja_esperada])
+                else:
+                    # Fallback de seguridad: X=0.0, Y=±2.0 (posición de bandejas), Z=3.0 (desde arriba)
+                    coord_ref = (0.0, 2.0, 3.0) if bandeja_esperada == "bandeja1" else (0.0, -2.0, 3.0)
                 objetos_ordenados = self.simulador.obtener_candidatos_ordenados(lista_objs, criterio_busqueda, coord_ref)
 
                 # Dividimos los candidatos en la "Ventana Superficial" y el "Resto Profundo"

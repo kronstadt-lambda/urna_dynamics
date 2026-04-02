@@ -21,6 +21,8 @@ VAL_SETTINGS_FILE = CONFIG_DIR / "val_settings.json"
 PHYS_COMPILATION_FILE = CONFIG_DIR / "recopilacion_fisica.json" # Dataset de resultados reales para validación
 URNA_COLORS_FILE = CONFIG_DIR / "urna_colors.json" # Mapeo de colores a votantes para validación
 COUNT_REAL_FILE = CONFIG_DIR / "conteo_real.json" # Conteo real para comparación de resultados
+VOTOS_REAL_FILE = FILES_DIR / "votos_base.csv"
+FORENSIC_SETTINGS_FILE = CONFIG_DIR / "forensic_settings.json"
 
 # Nombre de archivos especificos para calibracion
 EXT_SIMULATION_CSV_NAME = "extraccion_auditoria_urn1_completa.csv"
