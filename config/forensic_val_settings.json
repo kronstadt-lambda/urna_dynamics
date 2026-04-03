@@ -1,10 +1,10 @@
 {
-  "nombre_experimento": "validacion_estratigrafia_0.7m_euclidiana_patron2a1",
+  "nombre_experimento": "validacion_estratigrafia_0.7m_euclidiana_patron3a1",
   "archivos_datos_json": ["urna1_val.json", "urna2_val.json"],
   "parametros_analisis": {
-    "ancho_estrato": 6,
+    "ancho_estrato": 8,
     "total_votos_urna": 113,
-    "max_iteraciones_montecarlo": 500
+    "max_iteraciones_montecarlo": 1000
   },
   "objetivos_validacion": [
     {
@@ -15,6 +15,5 @@
       "partido_acronimo": "PP",
       "opcion_esperada": "OPCION 4"
     }
-  ],
-  "porcentajes_sensibilidad": [0.7, 0.8, 0.9, 1.0]
+  ]
 }

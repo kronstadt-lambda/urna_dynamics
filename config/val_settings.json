@@ -1,10 +1,10 @@
 {
-  "nombre_experimento": "validacion_estratigrafia_0.7m_euclidiana_patron3a1",
+  "nombre_experimento": "validacion_estratigrafia_0.5m_euclidiana_patron3a1",
   "archivos_datos_json": ["urna1_val.json", "urna2_val.json"],
   "cantidad_simulaciones": 100,
   "archivo_urna_blend": "urna.blend",
   "archivo_voto_blend": "voto.blend",
-  "archivo_bandeja_blend": "bandeja_70cm.blend",
+  "archivo_bandeja_blend": "bandeja_50cm.blend",
   "guardar_blend_inspeccion": false,
   "parametros_tecnicos": {
     "physics": {

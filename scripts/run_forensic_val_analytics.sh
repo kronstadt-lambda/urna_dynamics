@@ -12,4 +12,4 @@ export PYTHONPATH="$PROJECT_ROOT/src"
 echo "Iniciando cálculo de validacion de modelo..."
 
 # 4. Ejecutar el script usando el Python del entorno virtual (sin Blender)
-"$VENV_PATH/bin/python" "$PROJECT_ROOT/src/validation/ejecutar_analisis_forense.py"
+"$VENV_PATH/bin/python" "$PROJECT_ROOT/src/validation/orquestador_validacion.py"
