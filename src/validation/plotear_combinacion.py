@@ -100,7 +100,7 @@ def plotear_combinacion(id_analisis: int):
         ancho_intervalo = config.get("parametros_analisis", {}).get("ancho_estrato", 6)
 
     dir_resultados = RESULTS_VOTE_DIR / nombre_exp
-    ruta_analisis = dir_resultados / "analisis_sensibilidad_forense.csv"
+    ruta_analisis = dir_resultados / f"analisis_sensibilidad_forense_estrato_{ancho_intervalo}.csv"
     ruta_simulaciones = dir_resultados / "resultado_forense_final.csv"
 
     dir_plots = dir_resultados / "plots"
@@ -168,7 +168,7 @@ def plotear_combinacion(id_analisis: int):
             total_miembros_oficial=total_miembros_oficial, total_votos=total_votos
         )
 
-    archivo_salida = dir_plots / f"plot_ID_{id_analisis}_cruzado.png"
+    archivo_salida = dir_plots / f"plot_ID_{id_analisis}_estrato_{ancho_intervalo}_cruzado.png"
 
     print("[*] Renderizando la gráfica de validación doble...")
     graficador = GraficadorValidacion()
